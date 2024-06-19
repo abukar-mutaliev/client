@@ -28,7 +28,9 @@ const start = async () => {
     });
     app.use(router);
 
-    app.listen(PORT, () => console.log(`Сервер запущен на порту:${PORT}`));
+    app.listen(PORT, "0.0.0.0", () =>
+      console.log(`Сервер запущен на порту:${PORT}`)
+    );
   } catch (e) {
     console.log("Невозможно выполнить подключение к БД: ", e);
   }
