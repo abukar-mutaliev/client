@@ -1,0 +1,28 @@
+.about-page {
+  width: 70%;
+  height: 66vh;
+  background: #4A4A4A;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-page span {
+  margin-top: 0;
+  color: #FFFFFF;
+}
+.about-page p {
+  color: #C9B07A;
+  width: 50%;
+  line-height: 59px;
+  height: 100px;
+}
+
+.about-page_container {
+  position: relative;
+  height: 60px;
+  display: grid;
+  justify-content: center;
+  top: 10%;
+  right: 31%;
+}

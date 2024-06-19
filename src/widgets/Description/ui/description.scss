@@ -1,0 +1,443 @@
+.description {
+  width: 70%;
+}
+.description-container {
+  width: 100%;
+  height: 50%;
+}
+
+.description-img {
+  width: 500px;
+  height: 350px;
+  object-fit: cover;
+}
+
+.description-btn {
+  font-family: "Montserrat", sans-serif;
+  display: block;
+  width: 60%;
+  height: 50px;
+  padding: 15px 30px;
+  border-radius: 50px;
+  background: #1A1A1A;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.5px;
+  color: #F0F0F0;
+  cursor: pointer;
+  margin-top: 5%;
+}
+
+.loader-email {
+  margin-inline: auto;
+  margin-top: 3%;
+}
+
+.description-btn:hover {
+  background-color: #1A1A1A;
+  transform: scale(1.05) translateY(-2px);
+}
+
+.description-title {
+  font-family: "Organetto Regular", sans-serif;
+  margin-top: 40px;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 36px;
+  text-align: left;
+}
+
+.description-hr {
+  margin-bottom: 10px;
+  margin-top: inherit;
+}
+
+.description-content {
+  display: flex;
+  justify-content: left;
+  margin-top: 40px;
+}
+
+.description-person {
+  width: 35%;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+}
+
+.description-personName {
+  font-family: Organetto, sans-serif;
+  font-size: 30px;
+  height: 54px;
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 1px solid #1A1A1A;
+  margin-bottom: 10px;
+}
+
+.description-personActivity {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline; /* Use baseline alignment */
+  font-family: 'Organetto Regular', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  border-bottom: 1px solid #1A1A1A;
+  padding: 5px 0;
+}
+
+.label {
+  font-weight: 400;
+  flex: 1; /* Make label take up available space */
+}
+
+.value {
+  font-weight: 700;
+  text-align: right;
+  margin-left: 10px;
+}
+
+.description-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 35px;
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
+  margin-left: 42%;
+  margin-right: auto;
+  padding-bottom: 5%;
+}
+
+.description-image-container {
+  display: grid;
+  height: 50%;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.modal h2, .ad-options h3 {
+  margin-left: 5px;
+  font-family: "Organetto Regular", sans-serif;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.modal input,
+.modal textarea {
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.modal textarea {
+  height: 200px;
+}
+
+.modal button {
+  height: 35px;
+  margin-left: 5px;
+  padding: 5px 15px 5px 15px;
+  gap: 10px;
+  border-radius: 50px;
+  margin-top: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  background: #1A1A1A;
+  font-weight: 700;
+  color: #F0F0F0;
+}
+
+.modal button:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+.modal button:last-child {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  background-color: #6c757d;
+  color: #F0F0F0;
+  border: none;
+}
+
+.modal button:last-child:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+input,
+textarea {
+  width: calc(100% - 20px);
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.error-message {
+  color: red;
+  margin: 10px;
+}
+
+.email_status-error {
+  height: 32px;
+  width: 60%;
+  background: red;
+  color: white;
+  border-radius: 50px;
+  margin-top: 3%;
+  text-align: center;
+  line-height: 32px;
+}
+.email_status-error span {
+  color: #F0F0F0;
+  font-family: "Organetto Regular", sans-serif;
+  font-size: 16px;
+  margin-top: 3%,
+
+}
+
+.email_status-succeeded {
+  background: #f45a5a;
+  height: 32px;
+  width: 60%;
+  border-radius: 50px;
+  margin-top: 3%;
+  text-align: center;
+  line-height: 32px;
+
+}
+
+.email_status-succeeded span {
+  font-family: "Organetto Regular", sans-serif;
+  color: #F0F0F0;
+  font-size: 16px;
+  margin-top: 3%,
+}
+.email_status-succeeded img {
+  width: 20px;
+}
+
+.ad-options {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding-top: 3%;
+}
+
+.ad-options .adPrice_label:last-child {
+  border-bottom: none;
+  padding-bottom: 5%;
+}
+
+.adPrice_label {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  font-family: "Montserrat", sans-serif;
+  line-height: 39px;
+}
+
+.adPrice_label input {
+   width: 8%;
+}
+.ad-options h3 {
+  font-family: "Organetto Regular", sans-serif;
+}
+
+.adPrice_label span {
+  margin-left: 5px;
+  font-weight: 700;
+}
+.mobile-order-btn {
+  display: none;
+}
+@media (max-width: 912px) {
+  .desktop-order-btn {
+    display: none;
+  }
+  .description-personName {
+    width: 90vw;
+    line-height: 60px;
+    text-align: center;
+    margin-top: 47px;
+  }
+  .description-person {
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mobile-order-btn {
+    display: block;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .description {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+  }
+  .description-title {
+    text-align: center;
+  }
+  .description-content {
+    display: grid;
+  }
+  .description-image-container {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+  }
+  .description-img {
+    width: 398px;
+    border-radius: 10px;
+  }
+  .description-text {
+    width: 90vw;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 35px;
+    text-align: left;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+  }
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90%;
+    overflow-y: auto;
+    z-index: 1001;
+  }
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .modal h2, .ad-options h3  {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .modal textarea, .modal input {
+    font-family: "Montserrat", sans-serif;
+  }
+  .adPrice_label {
+    line-height: 50px;
+  }
+  .adPrice_label input {
+    width: 15px;
+  }
+  .modal textarea {
+    height: 100px;
+  }
+}
+
+@media (max-width: 738px) {
+  .modal h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}

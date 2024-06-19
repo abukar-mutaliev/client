@@ -1,0 +1,171 @@
+.modal_edit_person {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content_edit_person {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  max-height: 80%;
+  border-radius: 10px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 30px -8px;
+}
+
+form input,
+form textarea {
+  font-family: "Montserrat", sans-serif;
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #45a049;
+  box-shadow: 0px 0px 30px -8px black;
+}
+
+.upload_photo {
+  position: relative;
+  margin-top: 5%;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 5%;
+  border: 2px dashed #28a7e6;
+  text-align: center;
+}
+
+.upload_photo span {
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #28a7e6;
+  display: block;
+  margin-top: 13px;
+}
+
+.upload_photo img {
+  width: 5%;
+  margin-top: 10px;
+}
+
+.upload_photo input {
+  cursor: pointer;
+  border: none;
+  opacity: 0;
+  padding: 60px;
+  background: #cccccc;
+}
+
+.modal-content_edit_person > form span {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+}
+
+.edit_select {
+  display: flex;
+  justify-content: left;
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+.edit_select {
+  margin-top: 5%;
+  cursor: pointer;
+}
+
+.edit_select select {
+  font-family: "Montserrat", sans-serif;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.networks-section {
+  margin-bottom: 20px;
+}
+
+.network {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.network input {
+  width: 48%;
+}
+
+.network_network_name {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+}
+.instagram_reels_ad span {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+}
+@media (max-width: 912px) {
+  .modal-content_edit_person h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .ad_price_item input {
+    width: 100%;
+  }
+}

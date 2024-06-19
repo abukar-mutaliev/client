@@ -1,0 +1,27 @@
+.regions_page {
+  .region_name {
+    font-family: Organetto, sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-left: 1%;
+  }
+
+  .regions_container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+.regions_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 912px) {
+  .regions_page .regions_container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}

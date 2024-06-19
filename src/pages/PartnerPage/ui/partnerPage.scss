@@ -1,0 +1,43 @@
+.partner_page {
+  width: 80%;
+  display: grid;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.partner_page span {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 45px;
+  text-align: left;
+  font-family: "Organetto Regular", sans-serif;
+  padding-bottom: 5%;
+}
+.partner_page ul {
+  padding-bottom: 3%;
+  line-height: 30px;
+}
+
+.partner_page li {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  line-height: 35px;
+  padding-top: 5px;
+}
+
+.btn_submit {
+  cursor: pointer;
+}
+
+.btn_submit:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .partner_page {
+    width: 90%;
+  }
+  .partner_page span {
+    font-size: 18px;
+  }
+}
