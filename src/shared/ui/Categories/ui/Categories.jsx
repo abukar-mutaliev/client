@@ -6,7 +6,7 @@ import "./categories.scss";
 
 export function Categories() {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories.categories);
+  const categories = useSelector((state) => state.categories?.categories);
   const navigate = useNavigate();
 
   useEffect(() => {

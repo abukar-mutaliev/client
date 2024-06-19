@@ -6,7 +6,7 @@ import "./regions.scss";
 
 export function Regions() {
   const dispatch = useDispatch();
-  const regions = useSelector((state) => state.regions.regions);
+  const regions = useSelector((state) => state.regions?.regions);
   const navigate = useNavigate();
 
   useEffect(() => {
