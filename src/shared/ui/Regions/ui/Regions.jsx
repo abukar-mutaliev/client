@@ -19,7 +19,7 @@ export function Regions() {
       navigate(`/region/${selectedRegionId}`);
     }
   };
-  if (!regions) {
+  if (regions.length === 0) {
     return <div>Регионы пока не добавлены</div>;
   }
   return (

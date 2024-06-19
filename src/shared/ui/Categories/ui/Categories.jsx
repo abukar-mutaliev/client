@@ -20,7 +20,7 @@ export function Categories() {
     }
   };
 
-  if (!categories) {
+  if (categories.length === 0) {
     return <div>Категории пока не добавлены</div>;
   }
 
