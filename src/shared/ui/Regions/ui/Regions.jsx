@@ -19,9 +19,7 @@ export function Regions() {
       navigate(`/region/${selectedRegionId}`);
     }
   };
-  if (regions.length === 0) {
-    return <div>Регионы пока не добавлены</div>;
-  }
+
   return (
     <div className="dropdown_menu">
       <select onChange={handleChange} defaultValue="">

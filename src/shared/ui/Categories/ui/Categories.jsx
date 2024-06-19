@@ -20,10 +20,6 @@ export function Categories() {
     }
   };
 
-  if (categories.length === 0) {
-    return <div>Категории пока не добавлены</div>;
-  }
-
   return (
     <div className="dropdown_menu">
       <select onChange={handleChange} defaultValue="">
