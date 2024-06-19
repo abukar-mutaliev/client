@@ -7,11 +7,7 @@ import btnIcon from "../../../assets/icons/button.svg";
 export function Card({ item }) {
   return (
     <div className="card">
-      <img
-        className="card-image"
-        src={`http://31.128.40.169:5000${item.person_photo}`}
-        alt="img"
-      />
+      <img className="card-image" src={`/${item.person_photo}`} alt="img" />
       <span>{item.person_name}</span>
       <div className="clamp">
         <p>{item.person_description}</p>
