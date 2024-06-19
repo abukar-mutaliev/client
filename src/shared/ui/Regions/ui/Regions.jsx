@@ -19,7 +19,7 @@ export function Regions() {
       navigate(`/region/${selectedRegionId}`);
     }
   };
-  if (!categories) {
+  if (!regions) {
     return <div>Регионы пока не добавлены</div>;
   }
   return (
@@ -28,7 +28,7 @@ export function Regions() {
         <option className="dropdown_option" value="" disabled>
           Регионы
         </option>
-        {regions.map((region) => (
+        {regions?.map((region) => (
           <option key={region.region_id} value={region.region_id}>
             {region.region_name}
           </option>

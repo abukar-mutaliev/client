@@ -30,7 +30,7 @@ export function Categories() {
         <option className="dropdown_option" value="" disabled>
           Категории
         </option>
-        {categories.map((category) => (
+        {categories?.map((category) => (
           <option key={category.category_id} value={category.category_id}>
             {category.category_name}
           </option>
