@@ -9,7 +9,7 @@ export function Card({ item }) {
     <div className="card">
       <img
         className="card-image"
-        src={`http://31.128.40.169:5000/${item.person_photo}`}
+        src={`http://31.128.40.169:5000${item.person_photo}`}
         alt="img"
       />
       <span>{item.person_name}</span>
