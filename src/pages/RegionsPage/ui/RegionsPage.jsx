@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./regionsPage.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { BarLoader } from "react-spinners";
 import { getPersons } from "../../../app/providers/StoreProvider/personSlice";
 import { Card } from "../../../shared/ui/Card";
 import { fetchRegions } from "../../../app/providers/StoreProvider/regionSlice";
@@ -26,6 +27,14 @@ export function RegionsPage() {
   const regionName = regions.find(
     (region) => region.region_id === Number(id)
   )?.region_name;
+
+  if (!regions.length) {
+    return (
+      <div className="loader">
+        <BarLoader />
+      </div>
+    );
+  }
 
   return (
     <div className="regions_page">

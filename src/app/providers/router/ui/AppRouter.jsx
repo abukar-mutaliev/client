@@ -9,10 +9,12 @@ import { CategoriesPage } from "../../../../pages/CategoriesPage";
 import { LoginPage } from "../../../../pages/LoginPage";
 import { RegionsPage } from "../../../../pages/RegionsPage";
 import { PartnerPage } from "../../../../pages/PartnerPage";
+import ScrollToTop from "../../../../shared/ui/ScrollToTop";
 
 export function AppRouter() {
   return (
     <div className="container-AppRouter">
+      <ScrollToTop />
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/about" element={<AboutPage />} />

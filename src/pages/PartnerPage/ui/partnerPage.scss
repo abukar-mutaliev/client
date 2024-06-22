@@ -2,7 +2,6 @@
   width: 80%;
   display: grid;
   justify-content: center;
-  margin-top: 60px;
 }
 
 .partner_page span {
@@ -32,12 +31,18 @@
 .btn_submit:hover {
   transform: scale(1.05) translateY(-2px);
 }
-
 @media (max-width: 768px) {
   .partner_page {
     width: 90%;
+    display: ruby;
+    justify-content: center;
   }
   .partner_page span {
     font-size: 18px;
+  }
+  form button:hover {
+    background-color: black;
+    box-shadow: 0px 0px 0px 0px black;
+    transform: scale(1) translateY(1px);
   }
 }

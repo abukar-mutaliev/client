@@ -40,7 +40,6 @@
 
 .description-title {
   font-family: "Organetto Regular", sans-serif;
-  margin-top: 40px;
   font-size: 40px;
   font-weight: 700;
   line-height: 36px;
@@ -72,11 +71,11 @@
 .description-personName {
   font-family: Organetto, sans-serif;
   font-size: 30px;
-  height: 54px;
   font-weight: 700;
   text-align: left;
   border-bottom: 1px solid #1A1A1A;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
+  padding-bottom: 10px;
 }
 
 .description-personActivity {
@@ -90,6 +89,7 @@
   text-align: left;
   border-bottom: 1px solid #1A1A1A;
   padding: 5px 0;
+  flex-wrap: wrap
 }
 
 .label {
@@ -154,7 +154,11 @@
   margin-top: 40px;
   margin-bottom: 40px;
 }
-
+.ad-options h3 {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
 .input-error {
   border: 1px solid red;
 }
@@ -336,6 +340,7 @@ textarea {
   }
   .description-personName {
     width: 90vw;
+    height: 100%;
     line-height: 60px;
     text-align: center;
     margin-top: 47px;
@@ -425,6 +430,7 @@ textarea {
     font-family: "Montserrat", sans-serif;
   }
   .adPrice_label {
+    display: grid;
     line-height: 50px;
   }
   .adPrice_label input {
@@ -439,5 +445,11 @@ textarea {
   .modal h2 {
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+  .description-personActivity {
+    flex-wrap: wrap
+  }
+  .adPrice_label {
+    line-height: 39px;
   }
 }

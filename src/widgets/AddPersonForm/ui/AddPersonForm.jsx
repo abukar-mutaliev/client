@@ -28,7 +28,7 @@ export function AddPersonForm() {
 
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [addStatus, setAddStatus] = useState(null); // Track the status of adding a person
+  const [addStatus, setAddStatus] = useState(null);
 
   const dispatch = useDispatch();
   const regions = useSelector((state) => state.regions.regions);
@@ -80,6 +80,8 @@ export function AddPersonForm() {
       setAchievements("");
       setDescription("");
       setNetworks([{ network_name: "", followers: "" }]);
+      setSelectedRegion("");
+      setSelectedCategory("");
       setPersonPhoto(null);
       setAdPrices({
         instagram_reels_ad: null,
@@ -90,19 +92,10 @@ export function AddPersonForm() {
       });
       toast.success("Клиент добавлен!");
     } catch (err) {
-      toast.error(`Ошибка при добавления клиента: ${err}`);
+      setAddStatus("error");
+      toast.error(`Ошибка при добавления партнера: ${err}`);
     }
   };
-
-  useEffect(() => {
-    if (addStatus === "success") {
-      const timer = setTimeout(() => {
-        navigate("/admin");
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-    return undefined;
-  }, [addStatus, navigate]);
 
   const handlePhotoClick = () => {
     document.getElementById("photoUpload").click();
@@ -111,7 +104,7 @@ export function AddPersonForm() {
   return (
     <div className="add_person-body">
       <div className="add_person-form">
-        <h1>ДОБАВЛЕНИЕ КЛИЕНТА</h1>
+        <h1>ДОБАВЛЕНИЕ ПАРТНЕРА</h1>
       </div>
       <div className="form_container">
         <form onSubmit={handleSubmit}>
@@ -347,7 +340,7 @@ export function AddPersonForm() {
             </div>
           </div>
           <button className="btn_submit" type="submit">
-            добавить клиента
+            добавить партнера
           </button>
         </form>
       </div>

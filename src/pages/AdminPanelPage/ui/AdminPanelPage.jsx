@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "./AdminPanelPage.scss";
+import { BarLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -10,7 +11,6 @@ import {
   fetchAdmins,
   logoutAdmin,
 } from "../../../app/providers/StoreProvider/adminSlice";
-import loaderGif from "../../../shared/assets/icons/preloader.gif";
 import { AddAdminForm } from "../../../widgets/AddAdminForm";
 import { AdminsList } from "../../../widgets/AdminsList/ui/AdminsList";
 import { CategoriesList } from "../../../widgets/CategoriesList";
@@ -48,7 +48,7 @@ export function AdminPanelPage() {
   if (loading) {
     return (
       <div className="loader">
-        <img src={loaderGif} alt="Loading..." />
+        <BarLoader />
       </div>
     );
   }

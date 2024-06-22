@@ -67,10 +67,14 @@
   text-align: center;
   color: #1A1A1A;
   text-decoration: none;
-  width: 100%;
-  gap: 10px;
-}
 
+  gap: 10px;
+  width: 150px;
+  transition: width 0.3s ease;
+}
+.dropdown_menu select:valid {
+  width: auto;
+}
 
 .dropdown_menu::after {
   content: '▼';

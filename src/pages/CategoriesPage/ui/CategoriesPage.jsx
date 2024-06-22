@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./categoriesPage.scss";
+import { BarLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPersons } from "../../../app/providers/StoreProvider/personSlice";
@@ -11,6 +12,7 @@ export function CategoriesPage() {
   const { id } = useParams();
   const persons = useSelector((state) => state.persons.persons);
   const categories = useSelector((state) => state.categories.categories);
+  const loading = useSelector((state) => state.categories.status === "loading");
 
   useEffect(() => {
     dispatch(getPersons());
@@ -26,6 +28,14 @@ export function CategoriesPage() {
   const categoryName = categories.find(
     (category) => category.category_id === Number(id)
   )?.category_name;
+
+  if (!categories.length) {
+    return (
+      <div className="loader">
+        <BarLoader />
+      </div>
+    );
+  }
 
   return (
     <div className="categories_page">

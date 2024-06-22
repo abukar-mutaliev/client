@@ -5,7 +5,6 @@ import { Categories } from "../../../shared/ui/Categories";
 import { Logo } from "../../../shared/ui/Logo";
 import { Search } from "../../../shared/ui/Search";
 import { Regions } from "../../../shared/ui/Regions";
-import { Contact } from "../../../shared/ui/Contact";
 import "./Navbar.scss";
 import menuIcon from "../../../shared/assets/icons/menu.svg";
 import closeIcon from "../../../shared/assets/icons/close-menu.svg";
@@ -14,6 +13,7 @@ import mobileSearch from "../../../shared/assets/icons/mobile-search.svg";
 import { getCategories } from "../../../app/providers/StoreProvider/categoriesSlice";
 import { fetchRegions } from "../../../app/providers/StoreProvider/regionSlice";
 import { MobileSearch } from "../../MobileSearch";
+import { Partner } from "../../../shared/ui/Partner";
 
 export function Navbar() {
   const [isSearchVisible, setSearchVisible] = useState(false);
@@ -27,17 +27,17 @@ export function Navbar() {
     dispatch(fetchRegions());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+
   const handleChangeRegion = (event) => {
     const selectedRegionId = event.target.value;
     setMenuVisible(!isMenuVisible);
-
     if (selectedRegionId) {
       navigate(`/region/${selectedRegionId}`);
     }
   };
-  useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
 
   const handleChange = (event) => {
     const selectedCategoryId = event.target.value;
@@ -55,9 +55,8 @@ export function Navbar() {
           <Categories />
           <Regions />
         </div>
-        <Contact />
+        <Partner />
         <Search />
-
         <div className="icons">
           <button
             type="button"
@@ -108,7 +107,11 @@ export function Navbar() {
           </button>
           <div className="menu-content">
             <div className="mobile-dropdown-menu">
-              <select onChange={handleChange} defaultValue="">
+              <select
+                onChange={handleChange}
+                style={{ width: "225px" }}
+                defaultValue=""
+              >
                 <option className="mobile-dropdown_option" value="" disabled>
                   Категории
                 </option>
@@ -123,7 +126,11 @@ export function Navbar() {
               </select>
             </div>
             <div className="mobile-dropdown-menu">
-              <select onChange={handleChangeRegion} defaultValue="">
+              <select
+                onChange={handleChangeRegion}
+                style={{ width: "194px" }}
+                defaultValue=""
+              >
                 <option className="mobile-dropdown_option" value="" disabled>
                   Регионы
                 </option>
@@ -134,8 +141,13 @@ export function Navbar() {
                 ))}
               </select>
             </div>
-            <Link to="/about" type="button" className="mobile-about">
-              О НАС
+            <Link
+              to="/partner"
+              type="button"
+              onClick={() => setMenuVisible(false)}
+              className="mobile-about"
+            >
+              Стать партнером
             </Link>
           </div>
         </div>

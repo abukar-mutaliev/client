@@ -108,9 +108,9 @@ export function PartnerModal({ isOpen, onClose, onSubmit }) {
             value={formData.achievements}
             onChange={handleInputChange}
           />
-          <div className="dropdown_menu">
+          <div className="partner-dropdown_menu">
             <select onChange={addNetworkFromDropdown} defaultValue="">
-              <option className="dropdown_option" value="" disabled>
+              <option className="partner-dropdown_option" value="" disabled>
                 Соцсети
               </option>
               {networks.map((network) => (

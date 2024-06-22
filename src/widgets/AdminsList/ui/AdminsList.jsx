@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { BarLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import loaderGif from "../../../shared/assets/icons/preloader.gif";
 import {
   deleteAdmin,
   fetchAdmins,
@@ -42,7 +42,7 @@ export const AdminsList = React.memo(() => {
   if (!admins.length) {
     return (
       <div className="loader">
-        <img src={loaderGif} alt="Loading..." />
+        <BarLoader />
       </div>
     );
   }

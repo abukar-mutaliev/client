@@ -58,4 +58,11 @@
   .slick-slider {
     width: 100%;
   }
+  .slick-next {
+    right: 10px;
+    display: none;
+  }
+  .slick-prev:before, .slick-next:before {
+    display: none;
+  }
 }

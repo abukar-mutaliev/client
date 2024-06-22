@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BarLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "./description.scss";
 import { useParams } from "react-router-dom";
@@ -10,7 +11,6 @@ import {
 import { getCategories } from "../../../app/providers/StoreProvider/categoriesSlice";
 import { sendEmail } from "../../../app/providers/StoreProvider/emailSlice";
 import "react-toastify/dist/ReactToastify.css";
-import loaderGif from "../../../shared/assets/icons/preloader.gif";
 
 export function Description(props) {
   const { id } = useParams();
@@ -68,7 +68,7 @@ export function Description(props) {
   if (isLoading || !persons.length || !person) {
     return (
       <div className="loader">
-        <img src={loaderGif} alt="Loading..." />
+        <BarLoader />
       </div>
     );
   }
@@ -125,6 +125,7 @@ export function Description(props) {
 
   const handleCloseModal = (e) => {
     if (e.target.classList.contains("modal-overlay")) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
       setModalIsOpen(false);
     }
   };
@@ -144,7 +145,7 @@ export function Description(props) {
             />
             {emailStatus === "loading" ? (
               <div className="loader-email">
-                <img src={loaderGif} alt="Loading..." />
+                <BarLoader />
               </div>
             ) : (
               <button

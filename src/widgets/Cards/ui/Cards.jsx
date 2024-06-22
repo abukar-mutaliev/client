@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BarLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import "./cards.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +7,6 @@ import { Card } from "../../../shared/ui/Card";
 import { getPersons } from "../../../app/providers/StoreProvider/personSlice";
 import { getCategories } from "../../../app/providers/StoreProvider/categoriesSlice";
 import iconMore from "../../../shared/assets/icons/right.svg";
-import loaderGif from "../../../shared/assets/icons/preloader.gif";
 
 export function Cards() {
   const dispatch = useDispatch();
@@ -35,14 +35,10 @@ export function Cards() {
     return visibleCards[categoryId] || 4;
   };
 
-  if (!persons.length) {
-    return <div className="loader">Здесь пока нет партнеров</div>;
-  }
-
-  if (!persons) {
+  if (categories.loading) {
     return (
       <div className="loader">
-        <img src={loaderGif} alt="Loading..." />
+        <BarLoader />
       </div>
     );
   }

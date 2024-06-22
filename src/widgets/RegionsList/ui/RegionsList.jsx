@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { BarLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import loaderGif from "../../../shared/assets/icons/preloader.gif";
+import { AddRegionForm } from "../../../shared/ui/AddRegionForm";
 import {
   fetchRegions,
   deleteRegion,
   updateRegion,
 } from "../../../app/providers/StoreProvider/regionSlice";
-import { AddRegionForm } from "../../../shared/ui/AddRegionForm";
 
 export const RegionsList = React.memo(() => {
   const dispatch = useDispatch();
@@ -76,7 +76,7 @@ export const RegionsList = React.memo(() => {
   if (!regions.length) {
     return (
       <div className="loader">
-        <img src={loaderGif} alt="Loading..." />
+        <BarLoader />
       </div>
     );
   }

@@ -1,10 +1,10 @@
 import "./partnerPage.scss";
 import { useState } from "react";
+import { BarLoader } from "react-spinners";
 import { toast, ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { PartnerModal } from "../../../widgets/PartnerModal";
 import { sendPartnerEmail } from "../../../app/providers/StoreProvider/partnerSlice";
-import loaderGif from "../../../shared/assets/icons/preloader.gif";
 
 export function PartnerPage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -114,7 +114,7 @@ export function PartnerPage() {
       </ul>
       {emailStatus === "loading" ? (
         <div className="loader-email">
-          <img src={loaderGif} alt="Loading..." />
+          <BarLoader />
         </div>
       ) : (
         <button type="button" className="btn_submit" onClick={handleOpenModal}>
