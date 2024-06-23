@@ -208,6 +208,7 @@ export function AddPersonForm() {
           <div className="add_person-regions-networks">
             <div className="add_person_network-container">
               <div className="add_person_network">
+                <span>Добавить соцсеть</span>
                 {networks.map((network, index) => (
                   <div key={index} className="add_person_network_form">
                     <input

@@ -247,6 +247,9 @@
   .add_person_network {
     width: 100%;
   }
+  .add_person_network span {
+    text-align: center;
+  }
   .add_person_network-container {
     display: flex;
     width: 100%;
@@ -256,7 +259,8 @@
   }
   .add_person_network_form {
     margin: 10px;
-    gap: 110px;
+    gap: 10px;
+    flex-direction: column;
   }
   .add_person_network input {
     margin-left: 0px;
