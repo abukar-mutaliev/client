@@ -5,7 +5,7 @@ import { registerAdmin } from "../../../app/providers/StoreProvider/adminSlice";
 import { AdminForm } from "../../../shared/ui/AddForm";
 import "./addAdminForm.scss";
 
-export function AddAdminForm() {
+export function AddAdminForm(ref) {
   const dispatch = useDispatch();
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 

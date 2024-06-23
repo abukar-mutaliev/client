@@ -240,6 +240,7 @@ export function AddPersonForm() {
             <div className="add_person_select">
               <select
                 value={selectedRegion}
+                style={{ width: "90px" }}
                 onChange={(e) => setSelectedRegion(e.target.value)}
                 required
               >
@@ -254,6 +255,7 @@ export function AddPersonForm() {
               </select>
               <select
                 value={selectedCategory}
+                style={{ width: "120px" }}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 required
               >
@@ -314,7 +316,7 @@ export function AddPersonForm() {
             </div>
             <div className="ad_price_item">
               <label htmlFor="video_ad_by_user">
-                Видеореклама от пользователя:
+                Видеореклама от партнера:
                 <input
                   type="number"
                   id="video_ad_by_user"

@@ -216,8 +216,7 @@
   }
   .add_person_container textarea {
     width: 95%;
-    margin-right: 0;
-    margin-left: 0;
+    margin: 10px;
   }
   .form_container form {
     width: 100%;
@@ -225,7 +224,7 @@
     justify-items: center;
   }
   .form_container {
-  width: 95vw;
+    width: 100%;
   }
   .add_person-regions-networks {
     display: flex;
@@ -234,14 +233,13 @@
     align-content: space-around;
   }
   .add_person_select {
-    width: 100%;
+    width: 90%;
     height: 40px;
     display: flex;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 10px;
     cursor: pointer;
-    justify-content: flex-start;
-    gap: 50px;
+    justify-content: space-between;
+    gap: 10px;
   }
   .add_person_select select {
     margin-left: 0;
@@ -255,6 +253,10 @@
     margin-top: 4px;
     flex-direction: column;
     align-items: center;
+  }
+  .add_person_network_form {
+    margin: 10px;
+    gap: 110px;
   }
   .add_person_network input {
     margin-left: 0px;
@@ -276,10 +278,12 @@
     width: 30%;
   }
   .ad_price_item label {
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 10px;
     align-items: center;
     justify-content: space-between;
+    margin: 10px;
   }
 }

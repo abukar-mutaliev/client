@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./AdminPanelPage.scss";
 import { BarLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,14 +19,16 @@ import { RegionsList } from "../../../widgets/RegionsList";
 export function AdminPanelPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showAdminForm, setShowAdminForm] = useState(false);
-  const [showPersonForm, setShowPersonForm] = useState(false);
-  const [showPersons, setShowPersons] = useState(false);
-  const [showAdminsList, setShowAdminsList] = useState(false);
-  const [showCategories, setShowCategories] = useState(false);
-  const [showRegions, setShowRegions] = useState(false);
+  const [activeComponent, setActiveComponent] = useState(null);
   const admin = useSelector((state) => state.admin.admin);
   const loading = useSelector((state) => state.admin.status === "loading");
+
+  const personFormRef = useRef(null);
+  const adminFormRef = useRef(null);
+  const personsRef = useRef(null);
+  const adminsListRef = useRef(null);
+  const categoriesRef = useRef(null);
+  const regionsRef = useRef(null);
 
   useEffect(() => {
     dispatch(checkAdminStatus());
@@ -44,6 +46,19 @@ export function AdminPanelPage() {
     dispatch(logoutAdmin());
     navigate("/login");
   }, [dispatch, navigate]);
+
+  const scrollToRef = (ref) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleButtonClick = (component, ref) => {
+    setActiveComponent((prevComponent) =>
+      prevComponent === component ? null : component
+    );
+    setTimeout(() => scrollToRef(ref), 0);
+  };
 
   if (loading) {
     return (
@@ -69,59 +84,30 @@ export function AdminPanelPage() {
         <button
           className="admin_btn"
           type="button"
-          onClick={() => {
-            setShowPersonForm(!showPersonForm);
-            setShowAdminForm(false);
-            setShowPersons(false);
-            setShowAdminsList(false);
-            setShowCategories(false);
-            setShowRegions(false);
-          }}
+          onClick={() => handleButtonClick("personForm", personFormRef)}
         >
-          Добавить Клиента
+          Добавить партнера
         </button>
         <button
           className="admin_btn"
           type="button"
-          onClick={() => {
-            setShowPersons(!showPersons);
-            setShowAdminForm(false);
-            setShowPersonForm(false);
-            setShowAdminsList(false);
-            setShowCategories(false);
-            setShowRegions(false);
-          }}
+          onClick={() => handleButtonClick("personsList", personsRef)}
         >
-          Показать список клиентов
+          Показать список партнеров
         </button>
         {admin.isAdmin && (
           <button
             className="admin_btn"
             type="button"
-            onClick={() => {
-              setShowAdminForm(!showAdminForm);
-              setShowPersonForm(false);
-              setShowPersons(false);
-              setShowAdminsList(false);
-              setShowCategories(false);
-              setShowRegions(false);
-            }}
+            onClick={() => handleButtonClick("adminForm", adminFormRef)}
           >
             Добавить Админа
           </button>
         )}
-
         <button
           className="admin_btn"
           type="button"
-          onClick={() => {
-            setShowPersons(false);
-            setShowAdminForm(false);
-            setShowPersonForm(false);
-            setShowAdminsList(!showAdminsList);
-            setShowCategories(false);
-            setShowRegions(false);
-          }}
+          onClick={() => handleButtonClick("adminsList", adminsListRef)}
         >
           Показать список Администраторов
         </button>
@@ -130,38 +116,48 @@ export function AdminPanelPage() {
         <button
           className="admin_btn"
           type="button"
-          onClick={() => {
-            setShowPersons(false);
-            setShowAdminForm(false);
-            setShowPersonForm(false);
-            setShowAdminsList(false);
-            setShowRegions(false);
-            setShowCategories(!showCategories);
-          }}
+          onClick={() => handleButtonClick("categoriesList", categoriesRef)}
         >
           Показать список категорий
         </button>
         <button
           className="admin_btn"
           type="button"
-          onClick={() => {
-            setShowPersons(false);
-            setShowAdminForm(false);
-            setShowPersonForm(false);
-            setShowAdminsList(false);
-            setShowCategories(false);
-            setShowRegions(!showRegions);
-          }}
+          onClick={() => handleButtonClick("regionsList", regionsRef)}
         >
           Показать список регионов
         </button>
       </div>
-      {showPersonForm && <AddPersonForm />}
-      {showAdminForm && <AddAdminForm />}
-      {showPersons && <PersonsCardEdit />}
-      {showAdminsList && <AdminsList />}
-      {showCategories && <CategoriesList />}
-      {showRegions && <RegionsList />}
+      {activeComponent === "personForm" && (
+        <div ref={personFormRef}>
+          <AddPersonForm />
+        </div>
+      )}
+      {activeComponent === "adminForm" && (
+        <div ref={adminFormRef}>
+          <AddAdminForm />
+        </div>
+      )}
+      {activeComponent === "personsList" && (
+        <div ref={personsRef}>
+          <PersonsCardEdit />
+        </div>
+      )}
+      {activeComponent === "adminsList" && (
+        <div ref={adminsListRef}>
+          <AdminsList />
+        </div>
+      )}
+      {activeComponent === "categoriesList" && (
+        <div ref={categoriesRef}>
+          <CategoriesList />
+        </div>
+      )}
+      {activeComponent === "regionsList" && (
+        <div ref={regionsRef}>
+          <RegionsList />
+        </div>
+      )}
       <ToastContainer />
     </div>
   );
