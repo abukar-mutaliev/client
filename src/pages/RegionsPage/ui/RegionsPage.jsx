@@ -38,13 +38,11 @@ export function RegionsPage() {
 
   return (
     <div className="regions_page">
-      <div>
-        <p className="region_name">{regionName}</p>
-        <div className="regions_container">
-          {filteredPersons.map((item) => {
-            return <Card key={item.person_id} item={item} />;
-          })}
-        </div>
+      <p className="region_name">{regionName}</p>
+      <div className="regions_container">
+        {filteredPersons.map((item) => {
+          return <Card key={item.person_id} item={item} />;
+        })}
       </div>
     </div>
   );

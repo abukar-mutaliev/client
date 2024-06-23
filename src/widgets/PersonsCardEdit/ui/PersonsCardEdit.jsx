@@ -67,9 +67,9 @@ export function PersonsCardEdit() {
       setShowModal(false);
       setIsLoading(true);
       setCurrentPerson(null);
-      toast.success("Данные клиента изменены");
+      toast.success("Данные партнера изменены");
     } catch (e) {
-      toast.error(`Ошибка при изменении данных клиента: ${err}`);
+      toast.error(`Ошибка при изменении данных партнера: ${err}`);
     }
   };
 
@@ -107,7 +107,7 @@ export function PersonsCardEdit() {
               type="button"
               style={{
                 height: "26px",
-                width: "40px",
+                width: "30px",
                 background: "transparent",
                 border: "none",
                 cursor: "pointer",
@@ -132,7 +132,7 @@ export function PersonsCardEdit() {
       {showConfirm && (
         <div className="modal-overlay" onClick={handleBackgroundClick}>
           <div className="modal">
-            <p>Вы уверены, что хотите удалить этого клиента?</p>
+            <p>Вы уверены, что хотите удалить этого партнера?</p>
             <button type="button" onClick={confirmDeletePerson}>
               Да
             </button>

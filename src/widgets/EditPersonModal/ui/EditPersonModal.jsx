@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as PropTypes from "prop-types";
 import "./editPersonModal.scss";
+import { toast, ToastContainer } from "react-toastify";
 import uploadIcon from "../../../shared/assets/icons/upload.svg";
 
 export function EditPersonModal({
@@ -74,8 +75,9 @@ export function EditPersonModal({
       );
       formData.append("networks", serializedNetworks);
       formData.append("ad_prices", JSON.stringify(adPrices));
+      toast.success("Данные партнера изменены");
     } catch (error) {
-      console.error("Error serializing networks or ad prices:", error);
+      toast.error("Ошибка при изменении партнера:", error);
       return;
     }
 
@@ -284,6 +286,7 @@ export function EditPersonModal({
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }

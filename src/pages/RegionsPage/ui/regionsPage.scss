@@ -25,3 +25,24 @@
     gap: 16px;
   }
 }
+
+@media (max-width: 768px) {
+  .regions_page .regions_container{
+    width: 100%;
+    display: grid;
+    gap: 16px;
+    justify-content: center;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .regions_page {
+    margin: 10px;
+    width: 100%;
+  }
+  .regions_container {
+    margin: 10px;
+  }
+  .region_name {
+    text-align: center;
+  }
+
+}
