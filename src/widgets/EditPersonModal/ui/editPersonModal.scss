@@ -17,20 +17,20 @@
   background-color: #fefefe;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
+  width: 100%;
+  max-width: 600px;
   max-height: 80%;
   border-radius: 10px;
   position: relative;
   overflow-y: auto;
 }
 
-.close {
+.modal_edit-close {
   color: #aaa;
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 28px;
+  top: 30px;
+  right: 30px;
+  font-size: 38px;
   font-weight: bold;
 }
 
@@ -103,19 +103,18 @@ form button:hover {
   font-size: 12px;
   font-weight: 500;
   color: black;
+  margin-left: 10px;
 }
 
 .edit_select {
+  width: 100%;
   display: flex;
-  justify-content: left;
-  width: 70%;
+  justify-content: space-between;
   margin-bottom: 20px;
-}
-
-.edit_select {
   margin-top: 5%;
   cursor: pointer;
 }
+
 
 .edit_select select {
   font-family: "Montserrat", sans-serif;
@@ -123,6 +122,10 @@ form button:hover {
   border-left: none;
   border-right: none;
   cursor: pointer;
+}
+
+.edit_select-network {
+  display: grid;
 }
 
 .button-group {
@@ -163,7 +166,10 @@ form button:hover {
     text-align: center;
   }
 }
-
+.modal-content_edit_person h2 {
+  text-align: center;
+  padding: 30px;
+}
 @media (max-width: 768px) {
   .ad_price_item input {
     width: 100%;

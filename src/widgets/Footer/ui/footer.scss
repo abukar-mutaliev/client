@@ -65,6 +65,10 @@
     width: 100%;
     margin-bottom: -50px;
   }
+  .footer_partner, .footer_categories {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
   .footer_categories {
     width: 100%;
     display: flex;

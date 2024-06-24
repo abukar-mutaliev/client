@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { CSSTransition } from "react-transition-group";
 import "./partnerModal.scss";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { getNetworks } from "../../../app/providers/StoreProvider/networkSlice";
 
-export function PartnerModal({ isOpen, onClose, onSubmit }) {
+export function PartnerModal({ isOpen, onSubmit, setModalIsOpen }) {
   const initialFormData = {
     firstName: "",
     lastName: "",
@@ -15,6 +16,7 @@ export function PartnerModal({ isOpen, onClose, onSubmit }) {
     contactInfo: "",
     email: "",
   };
+  const modalRef = useRef(null);
   const [formData, setFormData] = useState(initialFormData);
   const networks = useSelector((state) => state.networks.networks);
   const dispatch = useDispatch();
@@ -65,116 +67,130 @@ export function PartnerModal({ isOpen, onClose, onSubmit }) {
     });
   };
 
+  const handleCloseModal = (e) => {
+    if (e.target.classList.contains("modal-overlay")) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setModalIsOpen(false);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
-    onClose();
+    handleCloseModal();
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <h2>Стань Партнером</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="firstName"
-            placeholder="Имя"
-            value={formData.firstName}
-            onChange={handleInputChange}
-            required
-          />
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Фамилия"
-            value={formData.lastName}
-            onChange={handleInputChange}
-            required
-          />
-          <input
-            type="text"
-            name="activity"
-            placeholder="Вид деятельности"
-            value={formData.activity}
-            onChange={handleInputChange}
-            required
-          />
-          <textarea
-            name="achievements"
-            placeholder="Достижения"
-            value={formData.achievements}
-            onChange={handleInputChange}
-          />
-          <div className="partner-dropdown_menu">
-            <select onChange={addNetworkFromDropdown} defaultValue="">
-              <option className="partner-dropdown_option" value="" disabled>
-                Соцсети
-              </option>
-              {networks.map((network) => (
-                <option key={network.network_id} value={network.network_id}>
-                  {network.network_name}
+    <CSSTransition
+      in={isOpen}
+      timeout={300}
+      classNames="modal"
+      unmountOnExit
+      nodeRef={modalRef}
+    >
+      <div className="modal-overlay" onClick={handleCloseModal}>
+        <div className="modal" ref={modalRef}>
+          <h2>Стань Партнером</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="firstName"
+              placeholder="Ваше имя"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Ваша фамилия"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
+              name="activity"
+              placeholder="Ваш вид деятельности"
+              value={formData.activity}
+              onChange={handleInputChange}
+              required
+            />
+            <textarea
+              name="achievements"
+              placeholder="Ваши достижения"
+              value={formData.achievements}
+              onChange={handleInputChange}
+            />
+            <div className="partner-dropdown_menu">
+              <select onChange={addNetworkFromDropdown} defaultValue="">
+                <option className="partner-dropdown_option" value="" disabled>
+                  Соцсети
                 </option>
-              ))}
-            </select>
-          </div>
-          {formData.networks.map((network, index) => (
-            <div key={index} className="network-field">
-              <input
-                type="text"
-                name="name"
-                placeholder="Соцсеть"
-                value={network.name}
-                onChange={(e) => handleNetworkChange(index, e)}
-                required
-              />
-              <input
-                type="number"
-                name="followers"
-                placeholder="Подписчики"
-                value={network.followers}
-                onChange={(e) => handleNetworkChange(index, e)}
-                required
-              />
-              <RiDeleteBin6Line
-                type="button"
-                role="button"
-                onClick={() => removeNetwork(index)}
-              />
+                {networks.map((network) => (
+                  <option key={network.network_id} value={network.network_id}>
+                    {network.network_name}
+                  </option>
+                ))}
+              </select>
             </div>
-          ))}
-          <button type="button" onClick={addNetwork}>
-            Добавить соцсеть
-          </button>
-          <input
-            type="text"
-            name="contactInfo"
-            placeholder="Контактная информация"
-            value={formData.contactInfo}
-            onChange={handleInputChange}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Ваша электронная почта"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-          <button type="submit">Отправить</button>
-          <button type="button" onClick={onClose}>
-            Закрыть
-          </button>
-        </form>
+            {formData.networks.map((network, index) => (
+              <div key={index} className="network-field">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Соцсеть"
+                  value={network.name}
+                  onChange={(e) => handleNetworkChange(index, e)}
+                  required
+                />
+                <input
+                  type="number"
+                  name="followers"
+                  placeholder="Ваши подписчики"
+                  value={network.followers}
+                  onChange={(e) => handleNetworkChange(index, e)}
+                  required
+                />
+                <RiDeleteBin6Line
+                  type="button"
+                  role="button"
+                  onClick={() => removeNetwork(index)}
+                />
+              </div>
+            ))}
+            <button type="button" onClick={addNetwork}>
+              Добавить соцсеть
+            </button>
+            <input
+              type="text"
+              name="contactInfo"
+              placeholder="Ваши контакты"
+              value={formData.contactInfo}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Ваша электронная почта"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
+            <button type="submit">Отправить</button>
+            <button type="button" onClick={() => setModalIsOpen(false)}>
+              Закрыть
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </CSSTransition>
   );
 }
 
 PartnerModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  setModalIsOpen: PropTypes.bool.isRequired,
 };

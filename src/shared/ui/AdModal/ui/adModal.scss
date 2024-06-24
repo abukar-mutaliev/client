@@ -1,0 +1,85 @@
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+  backdrop-filter: blur(5px);
+}
+
+.modal-enter {
+  opacity: 0;
+}
+.modal-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+.modal-exit {
+  opacity: 1;
+}
+.modal-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90%;
+  overflow-y: auto;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1001;
+  transform: scale(0.8);
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal-enter .modal {
+  transform: scale(0.8);
+}
+.modal-enter-active .modal {
+  transform: scale(1);
+  transition: transform 300ms;
+}
+.modal-exit .modal {
+  transform: scale(1);
+}
+.modal-exit-active .modal {
+  transform: scale(0.8);
+  transition: transform 300ms;
+}
+
+.modal h2, .ad-options h3 {
+  margin-left: 5px;
+  font-family: "Organetto Regular", sans-serif;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.modal-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.modal-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+.modal-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+.modal-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}

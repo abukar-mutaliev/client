@@ -14,9 +14,9 @@ class SendEmailController {
 
     const emailContent = `
       <h3>Заказ рекламы</h3>
-      <p><strong>Имя знаменитости:</strong> ${name}</p>
-      <p><strong>Вид деятельности:</strong> ${activity}</p>
-      <p><strong>Соцсети знаменитости:</strong></p>
+      <p><strong>Имя партнера:</strong> ${name}</p>
+      <p><strong>Вид деятельности партнера:</strong> ${activity}</p>
+      <p><strong>Соцсети партнера:</strong></p>
       <ul>
         ${networks
           .map(
@@ -29,9 +29,7 @@ class SendEmailController {
       <p><strong>Контактная информация заказчика:</strong> ${contactInfo}</p>
       <p><strong>Выбранная реклама:</strong></p>
       <ul>
-        ${adDetails
-          .map((ad) => `<li>${ad.type.replace(/_/g, " ")} - ${ad.price}₽</li>`)
-          .join("")}
+        ${adDetails.map((ad) => `<li>${ad}</li>`).join("")}
       </ul>
       ${
         otherAd ? `<p><strong>Расширенная реклама:</strong> ${otherAd}</p>` : ""

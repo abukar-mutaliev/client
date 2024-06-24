@@ -38,6 +38,27 @@
 }
 
 @media (max-width: 768px) {
+  .logo:hover,
+  .admin_btn:hover,
+  .icon-button:hover,
+  .menu-button:hover,
+  .close-icon:hover,
+  .search-icon:hover,
+  .menu-icon:hover {
+    background-color: initial;
+    color: initial;
+    box-shadow: initial;
+  }
+  .admin_btn,
+  .icon-button,
+  .menu-button,
+  .close-icon,
+  .search-icon,
+  .menu-icon,
+  .logo{
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
   .logo {
     margin-left: 15px;
   }

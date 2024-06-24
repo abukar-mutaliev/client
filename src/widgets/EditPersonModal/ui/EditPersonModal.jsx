@@ -110,7 +110,7 @@ export function EditPersonModal({
   return (
     <div className="modal_edit_person" onClick={handleBackgroundClick}>
       <div className="modal-content_edit_person">
-        <span className="close" onClick={onClose}>
+        <span className="modal_edit-close" onClick={onClose}>
           &times;
         </span>
         <h2>Редактировать Клиента</h2>
@@ -147,7 +147,7 @@ export function EditPersonModal({
             required
           />
           <div className="edit_select">
-            <div>
+            <div className="edit_select-network">
               <span>Категории</span>
               <select
                 value={category}
@@ -161,7 +161,7 @@ export function EditPersonModal({
                 ))}
               </select>
             </div>
-            <div>
+            <div className="edit_select-network">
               <span>Регионы</span>
               <select
                 value={region}
@@ -312,7 +312,7 @@ EditPersonModal.propTypes = {
       })
     ),
     AdPrice: PropTypes.arrayOf(
-      PropTypes.shape({
+      PropTypes.arrayOf({
         type: PropTypes.string,
         price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       })
