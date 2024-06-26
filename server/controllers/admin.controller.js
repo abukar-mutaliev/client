@@ -20,6 +20,7 @@ class AdminController {
       return next(ApiError.badRequest("Ошибка загрузки пользователя"));
     }
   }
+
   async registrationAdmin(req, res, next) {
     try {
       const { email, password, username, isAdmin } = req.body;

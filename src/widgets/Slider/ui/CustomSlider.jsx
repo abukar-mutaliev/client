@@ -48,7 +48,16 @@ export function CustomSlider(props) {
 
   return (
     <div className="slider-wrapper">
-      <Slider ref={sliderRef} {...settings}>
+      <Slider
+        ref={sliderRef}
+        dots={settings.dots}
+        infinite={settings.infinite}
+        speed={settings.speed}
+        slidesToShow={settings.slidesToShow}
+        slidesToScroll={settings.slidesToScroll}
+        beforeChange={settings.beforeChange}
+        afterChange={settings.afterChange}
+      >
         {slidesData.map((slide) => (
           <div className="slider-container" key={slide.id}>
             {slide.type === "image" && (

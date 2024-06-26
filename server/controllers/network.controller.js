@@ -15,6 +15,7 @@ class NetworkController {
       return next(ApiError.internal("Не удалось добавить"));
     }
   }
+
   async getNetworks(req, res, next) {
     try {
       const networks = await Network.findAll();
@@ -24,20 +25,21 @@ class NetworkController {
       return next(ApiError.internal("Ошибка загрузки person"));
     }
   }
+
   async getOneNetworks(req, res, next) {
     const network_id = req.params.id;
     try {
       const network = await Network.findByPk(network_id);
       if (network) {
         return res.json(network);
-      } else {
-        return res.status(404).json({ error: "network не найден" });
       }
+      return res.status(404).json({ error: "network не найден" });
     } catch (error) {
       console.error("Error fetching region:", error);
       return next(ApiError.internal("Ошибка загрузки network"));
     }
   }
+
   async updateNetwork(req, res, next) {
     try {
       const networkId = req.params.id;
@@ -75,6 +77,7 @@ class NetworkController {
       return next(ApiError.internal(`Ошибка сервера: ${error}`));
     }
   }
+
   async deleteNetwork(req, res, next) {
     try {
       const networkId = req.params.id;
