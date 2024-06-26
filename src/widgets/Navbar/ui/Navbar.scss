@@ -45,8 +45,6 @@
   .close-icon:hover,
   .search-icon:hover,
   .menu-icon:hover {
-    background-color: initial;
-    color: initial;
     box-shadow: initial;
   }
   .admin_btn,
@@ -58,6 +56,16 @@
   .logo{
     outline: none;
     -webkit-tap-highlight-color: transparent;
+  }
+  .admin_btn:active,
+  .icon-button:active,
+  .menu-button:active,
+  .close-icon:active,
+  .search-icon:active,
+  .menu-icon:active,
+  .logo:active,
+  {
+    background-color: #f0f0f0;
   }
   .logo {
     margin-left: 15px;
@@ -189,11 +197,13 @@
     position: relative;
   }
   .mobile-dropdown-menu select {
-
     outline: none;
     font-size: 24px;
     line-height: 21.65px;
     text-decoration: none;
+  }
+  .mobile-dropdown-menu select:active {
+    color: #767676;
   }
   .mobile-dropdown-menu::after {
     position: absolute;

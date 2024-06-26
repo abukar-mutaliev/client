@@ -455,6 +455,15 @@ textarea {
   .description-btn {
     width: 100%;
   }
+  .description-btn:active, .modal button:active {
+    background: #282727
+  }
+  .modal button:last-child:active {
+    background: #a7a7a7;
+  }
+  .description-btn:hover, .modal button:hover, .modal button:last-child:hover {
+    transform: scale(1) translateY(0px)
+  }
   .description-title {
     font-size: 36px;
   }

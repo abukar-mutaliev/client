@@ -43,6 +43,9 @@
 }
 
 @media (max-width: 768px) {
+  .footer_partner a:active, .footer_categories:active {
+    color: #767676;
+  }
   .footer {
     width: 100%;
     height: 80vh;

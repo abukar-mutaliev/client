@@ -56,7 +56,6 @@
 }
 
 .card-button:hover {
-  background-color: #1A1A1A;
   transform: scale(1.05) translateY(-2px);
 }
 
@@ -70,7 +69,12 @@
     height: 452px;
     margin-left: 0px;
   }
-
+  .card-button:active {
+    background: #282727
+  }
+  .card-button:hover {
+    transform: scale(1) translateY(0px)
+  }
   .card p {
     width: 90%;
   }
