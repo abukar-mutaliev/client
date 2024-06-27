@@ -12,18 +12,21 @@ export function Footer(props) {
   }, [dispatch]);
 
   return (
-    <div className="footer">
-      <p className="footer_logo"> LOGO</p>
-      <div className="footer_categories">
-        {categories.map((item) => (
-          <Link to={`/categories/${item.category_id}`} key={item.category_id}>
-            <div className="footer_categories">{item.category_name}</div>
-          </Link>
-        ))}
-        <div className="footer_partner">
-          <Link to="/partner">Стань партнером</Link>
+    <div className="footer-body">
+      <div className="footer">
+        <p className="footer_logo"> LOGO</p>
+        <div className="footer_categories">
+          {categories.map((item) => (
+            <Link to={`/categories/${item.category_id}`} key={item.category_id}>
+              <div className="footer_categories">{item.category_name}</div>
+            </Link>
+          ))}
+          <div className="footer_partner">
+            <Link to="/partner">Стань партнером</Link>
+          </div>
         </div>
       </div>
+      <p className="footer_p">&copy; 2024 MEDIA HUB. Все права защищены.</p>
     </div>
   );
 }

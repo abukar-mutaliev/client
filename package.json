@@ -31,11 +31,13 @@
     "react-transition-group": "^4.4.5",
     "redux": "^5.0.1",
     "redux-toolkit": "^1.1.2",
+    "sitemap": "^8.0.0",
     "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "generate-sitemap": "node generateSitemap.js"
   },
   "lint-staged": {
     "**/*.{js,jsx}": [

@@ -5,7 +5,7 @@ import { Cards } from "../../../widgets/Cards";
 
 export function MainPage() {
   return (
-    <div className="mainPAge">
+    <div className="mainPage">
       <CustomSlider />
       <Cards />
     </div>
