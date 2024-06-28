@@ -7,7 +7,6 @@ const hostname = "http://media-hub.ru";
 const routes = [
   "/",
   "/about",
-  "/admin",
   "/login",
   "/person/:id",
   "/partner",

@@ -192,5 +192,5 @@ export function PartnerModal({ isOpen, onSubmit, setModalIsOpen }) {
 PartnerModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  setModalIsOpen: PropTypes.bool.isRequired,
+  setModalIsOpen: PropTypes.func.isRequired,
 };
