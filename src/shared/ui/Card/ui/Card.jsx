@@ -9,7 +9,7 @@ export function Card({ item }) {
     <div className="card">
       <img
         className="card-image"
-        src={`${item.person_photo}`}
+        src={`/${item.person_photo}`}
         alt="бойцы блогеры спортсмены "
       />
       <span>{item.person_name}</span>
