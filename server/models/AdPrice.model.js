@@ -10,11 +10,38 @@ AdPrice.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    repost: DataTypes.FLOAT,
-    video_integration: DataTypes.FLOAT,
-    video_ad_by_user: DataTypes.FLOAT,
-    instagram_story_ad: DataTypes.FLOAT,
-    instagram_reels_ad: DataTypes.FLOAT,
+    instagram_joint_reel: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    instagram_story: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    instagram_story_repost: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    instagram_post: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    vk_post: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    telegram_post: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    youtube_standard_integration: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    video_greeting: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
   },
   {
     sequelize,

@@ -15,6 +15,8 @@ import { AddAdminForm } from "../../../widgets/AddAdminForm";
 import { AdminsList } from "../../../widgets/AdminsList/ui/AdminsList";
 import { CategoriesList } from "../../../widgets/CategoriesList";
 import { RegionsList } from "../../../widgets/RegionsList";
+import { AddNetworkForm } from "../../../widgets/AddNetworkForm";
+import { NetworksCardEdit } from "../../../shared/ui/NetworksCardEdit";
 
 export function AdminPanelPage() {
   const dispatch = useDispatch();
@@ -29,6 +31,8 @@ export function AdminPanelPage() {
   const adminsListRef = useRef(null);
   const categoriesRef = useRef(null);
   const regionsRef = useRef(null);
+  const networkFormRef = useRef(null);
+  const networksRef = useRef(null);
 
   useEffect(() => {
     dispatch(checkAdminStatus());
@@ -69,7 +73,7 @@ export function AdminPanelPage() {
   }
 
   if (!admin) {
-    return null;
+    return navigate("/login");
   }
 
   return (
@@ -127,6 +131,13 @@ export function AdminPanelPage() {
         >
           Показать список регионов
         </button>
+        <button
+          className="admin_btn"
+          type="button"
+          onClick={() => handleButtonClick("networksList", networksRef)}
+        >
+          Показать список соцсетей
+        </button>
       </div>
       {activeComponent === "personForm" && (
         <div ref={personFormRef}>
@@ -156,6 +167,16 @@ export function AdminPanelPage() {
       {activeComponent === "regionsList" && (
         <div ref={regionsRef}>
           <RegionsList />
+        </div>
+      )}
+      {activeComponent === "networkForm" && (
+        <div ref={networkFormRef}>
+          <AddNetworkForm />
+        </div>
+      )}
+      {activeComponent === "networksList" && (
+        <div ref={networksRef}>
+          <NetworksCardEdit />
         </div>
       )}
       <ToastContainer />

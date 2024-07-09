@@ -17,7 +17,8 @@ export function AdModal({
   const dispatch = useDispatch();
   const emailStatus = useSelector((state) => state.email.status);
   const emailError = useSelector((state) => state.email.error);
-  const [contactInfo, setContactInfo] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [comments, setComments] = useState("");
   const [selectedAds, setSelectedAds] = useState({});
   const [otherAd, setOtherAd] = useState("");
@@ -27,7 +28,7 @@ export function AdModal({
 
   useEffect(() => {
     if (emailStatus === "succeeded") {
-      toast.success("Заказ успешно сформирован!");
+      toast.success("Заказ рекламы успешно сформирован!");
     }
     if (emailStatus === "failed") {
       toast.error(`Ошибка при заказе рекламы: ${emailError}`);
@@ -43,7 +44,7 @@ export function AdModal({
   };
 
   const handleSendEmail = () => {
-    if (!contactInfo || !comments) {
+    if (!email || !phone || !comments) {
       setFormError(true);
       return;
     }
@@ -55,18 +56,22 @@ export function AdModal({
     const formattedAdDetails = selectedAdTypes
       .map((adType) => {
         switch (adType) {
-          case "instagram_reels_ad":
-            return `Instagram Reels - ${adPrices.instagram_reels_ad} ₽`;
-          case "instagram_story_ad":
-            return `Instagram Story - ${adPrices.instagram_story_ad} ₽`;
-          case "repost":
-            return `Repost - ${adPrices.repost} ₽`;
-          case "video_ad_by_user":
-            return `Видеореклама от ${person.person_name} - ${adPrices.video_ad_by_user} ₽`;
-          case "video_integration":
-            return `Интегрированная реклама - ${adPrices.video_integration} ₽`;
-          case "other_ad":
-            return `Расширенная реклама (цена договорная)`;
+          case "instagram_joint_reel":
+            return `Совместный Reel в Instagram - ${adPrices.instagram_joint_reel} ₽`;
+          case "instagram_story":
+            return `Story в Instagram - ${adPrices.instagram_story} ₽`;
+          case "instagram_story_repost":
+            return `Repost в сторис Instagram - ${adPrices.instagram_story_repost} ₽`;
+          case "instagram_post":
+            return `Публикация в Instagram - ${adPrices.instagram_post} ₽`;
+          case "vk_post":
+            return `Публикация в VK - ${adPrices.vk_post} ₽`;
+          case "telegram_post":
+            return `Публикация в Телеграм - ${adPrices.telegram_post} ₽`;
+          case "youtube_standard_integration":
+            return `Стандартная интеграция в ролике на YouTube - ${adPrices.youtube_standard_integration} ₽`;
+          case "video_greeting":
+            return `Видео привет, поздравление - ${adPrices.video_greeting} ₽`;
           default:
             return "";
         }
@@ -80,13 +85,17 @@ export function AdModal({
         network_name: network?.PersonNetwork.network_name,
         followers: network?.PersonNetwork.followers,
       })),
-      contactInfo,
+      contactInfo: {
+        email,
+        phone,
+      },
       comments,
       adDetails: formattedAdDetails,
       otherAd,
     };
 
-    setContactInfo("");
+    setEmail("");
+    setPhone("");
     setComments("");
     setSelectedAds({});
     setOtherAd("");
@@ -123,92 +132,156 @@ export function AdModal({
             className={formError && !comments ? "input-error" : ""}
           />
           <input
-            type="text"
-            placeholder="Ваши контактные данные"
-            value={contactInfo}
+            type="email"
+            placeholder="Ваш E-mail почта"
+            value={email}
             required
             onChange={(e) => {
-              setContactInfo(e.target.value);
+              setEmail(e.target.value);
               setFormError(false);
             }}
-            className={formError && !contactInfo ? "input-error" : ""}
+            className={formError && !email ? "input-error" : ""}
+          />
+          <input
+            type="tel"
+            placeholder="Ваш номер телефона"
+            value={phone}
+            required
+            onChange={(e) => {
+              setPhone(e.target.value);
+              setFormError(false);
+            }}
+            className={formError && !phone ? "input-error" : ""}
           />
           <div className="ad-options">
             <h3>Выберите рекламу</h3>
-            {adPrices?.instagram_reels_ad && (
-              <label htmlFor="instagram_reels_ad" className="adPrice_label">
+            {adPrices?.instagram_joint_reel && (
+              <label htmlFor="instagram_joint_reel" className="adPrice_label">
                 <input
                   type="checkbox"
-                  id="instagram_reels_ad"
-                  name="instagram_reels_ad"
-                  checked={selectedAds?.instagram_reels_ad || false}
+                  id="instagram_joint_reel"
+                  name="instagram_joint_reel"
+                  checked={selectedAds?.instagram_joint_reel || false}
                   onChange={handleCheckboxChange}
                 />
-                Instagram Reels -{" "}
+                Совместный Reel в Instagram -{" "}
                 <span>
-                  {adPrices?.instagram_reels_ad} <span>₽</span>
+                  {adPrices?.instagram_joint_reel} <span>₽</span>
                 </span>
               </label>
             )}
 
-            {adPrices?.instagram_story_ad && (
-              <label htmlFor="instagram_story_ad" className="adPrice_label">
+            {adPrices?.instagram_story && (
+              <label htmlFor="instagram_story" className="adPrice_label">
                 <input
                   type="checkbox"
-                  id="instagram_story_ad"
-                  name="instagram_story_ad"
-                  checked={selectedAds?.instagram_story_ad || false}
+                  id="instagram_story"
+                  name="instagram_story"
+                  checked={selectedAds?.instagram_story || false}
                   onChange={handleCheckboxChange}
                 />
-                Instagram Story -{" "}
+                Story в Instagram -{" "}
                 <span>
-                  {adPrices?.instagram_story_ad} <span>₽</span>
+                  {adPrices?.instagram_story} <span>₽</span>
                 </span>
               </label>
             )}
 
-            {adPrices?.repost && (
-              <label htmlFor="repost" className="adPrice_label">
+            {adPrices?.instagram_story_repost && (
+              <label htmlFor="instagram_story_repost" className="adPrice_label">
                 <input
                   type="checkbox"
-                  id="repost"
-                  name="repost"
-                  checked={selectedAds?.repost || false}
+                  id="instagram_story_repost"
+                  name="instagram_story_repost"
+                  checked={selectedAds?.instagram_story_repost || false}
                   onChange={handleCheckboxChange}
                 />
-                Repost -{" "}
+                Repost в сторис Instagram -{" "}
                 <span>
-                  {adPrices?.repost} <span>₽</span>
+                  {adPrices?.instagram_story_repost} <span>₽</span>
                 </span>
               </label>
             )}
 
-            {adPrices?.video_ad_by_user && (
-              <label htmlFor="video_ad_by_user" className="adPrice_label">
+            {adPrices?.instagram_post && (
+              <label htmlFor="instagram_post" className="adPrice_label">
                 <input
                   type="checkbox"
-                  id="video_ad_by_user"
-                  name="video_ad_by_user"
-                  checked={selectedAds?.video_ad_by_user || false}
+                  id="instagram_post"
+                  name="instagram_post"
+                  checked={selectedAds?.instagram_post || false}
                   onChange={handleCheckboxChange}
                 />
-                Видеореклама от {person.person_name} -{"   "}
-                <span>{adPrices?.video_ad_by_user} ₽</span>
+                Публикация в Instagram -{" "}
+                <span>
+                  {adPrices?.instagram_post} <span>₽</span>
+                </span>
               </label>
             )}
 
-            {adPrices?.video_integration && (
-              <label htmlFor="video_integration" className="adPrice_label">
+            {adPrices?.vk_post && (
+              <label htmlFor="vk_post" className="adPrice_label">
                 <input
                   type="checkbox"
-                  id="video_integration"
-                  name="video_integration"
-                  checked={selectedAds?.video_integration || false}
+                  id="vk_post"
+                  name="vk_post"
+                  checked={selectedAds?.vk_post || false}
                   onChange={handleCheckboxChange}
                 />
-                Интегрированная реклама -{" "}
+                Публикация в VK -{" "}
                 <span>
-                  {adPrices?.video_integration} <span>₽</span>
+                  {adPrices?.vk_post} <span>₽</span>
+                </span>
+              </label>
+            )}
+
+            {adPrices?.telegram_post && (
+              <label htmlFor="telegram_post" className="adPrice_label">
+                <input
+                  type="checkbox"
+                  id="telegram_post"
+                  name="telegram_post"
+                  checked={selectedAds?.telegram_post || false}
+                  onChange={handleCheckboxChange}
+                />
+                Публикация в Телеграм -{" "}
+                <span>
+                  {adPrices?.telegram_post} <span>₽</span>
+                </span>
+              </label>
+            )}
+
+            {adPrices?.youtube_standard_integration && (
+              <label
+                htmlFor="youtube_standard_integration"
+                className="adPrice_label"
+              >
+                <input
+                  type="checkbox"
+                  id="youtube_standard_integration"
+                  name="youtube_standard_integration"
+                  checked={selectedAds?.youtube_standard_integration || false}
+                  onChange={handleCheckboxChange}
+                />
+                Стандартная интеграция в ролике на YouTube -{" "}
+                <span>
+                  {adPrices?.youtube_standard_integration} <span>₽</span>
+                </span>
+              </label>
+            )}
+
+            {adPrices?.video_greeting && (
+              <label htmlFor="video_greeting" className="adPrice_label">
+                <input
+                  type="checkbox"
+                  id="video_greeting"
+                  name="video_greeting"
+                  checked={selectedAds?.video_greeting || false}
+                  onChange={handleCheckboxChange}
+                />
+                Видео привет, поздравление -{" "}
+                <span>
+                  {adPrices?.video_greeting} <span>₽</span>
                 </span>
               </label>
             )}
@@ -268,11 +341,14 @@ AdModal.propTypes = {
     ).isRequired,
   }).isRequired,
   adPrices: PropTypes.shape({
-    instagram_reels_ad: PropTypes.number,
-    instagram_story_ad: PropTypes.number,
-    repost: PropTypes.number,
-    video_ad_by_user: PropTypes.number,
-    video_integration: PropTypes.number,
+    instagram_joint_reel: PropTypes.number,
+    instagram_story: PropTypes.number,
+    instagram_story_repost: PropTypes.number,
+    instagram_post: PropTypes.number,
+    vk_post: PropTypes.number,
+    telegram_post: PropTypes.number,
+    youtube_standard_integration: PropTypes.number,
+    video_greeting: PropTypes.number,
   }).isRequired,
   personNetworks: PropTypes.arrayOf(
     PropTypes.shape({

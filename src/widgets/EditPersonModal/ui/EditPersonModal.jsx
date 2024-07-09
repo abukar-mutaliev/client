@@ -113,7 +113,7 @@ export function EditPersonModal({
         <span className="modal_edit-close" onClick={onClose}>
           &times;
         </span>
-        <h2>Редактировать Клиента</h2>
+        <h2>Редактировать Партнера</h2>
         <form>
           <span>Имя</span>
           <input

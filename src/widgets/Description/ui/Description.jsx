@@ -44,7 +44,6 @@ export function Description() {
     } else {
       document.body.style.overflow = "auto";
     }
-
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -77,21 +76,10 @@ export function Description() {
         <div className="description-content">
           <div className="description-image-container">
             <img
-              src={`/${person.person_photo}`}
+              src={`${person.person_photo}`}
               alt="img"
               className="description-img"
             />
-            {emailStatus === "loading" ? (
-              <BarLoader />
-            ) : (
-              <button
-                className="description-btn desktop-order-btn"
-                type="button"
-                onClick={handleOrderClick}
-              >
-                ЗАКАЗАТЬ РЕКЛАМУ
-              </button>
-            )}
           </div>
           <AdModal
             modalIsOpen={modalIsOpen}
@@ -125,10 +113,25 @@ export function Description() {
           </div>
         </div>
         <div className="description-text">
+          {emailStatus === "loading" ? (
+            <div className="loader_description">
+              <BarLoader />
+            </div>
+          ) : (
+            <button
+              className="description-btn desktop-order-btn"
+              type="button"
+              onClick={handleOrderClick}
+            >
+              ЗАКАЗАТЬ РЕКЛАМУ
+            </button>
+          )}
           <span>{person.person_description}</span>
         </div>
         {emailStatus === "loading" ? (
-          <BarLoader />
+          <div className="mobile-order-loader">
+            <BarLoader />
+          </div>
         ) : (
           <button
             className="description-btn mobile-order-btn"

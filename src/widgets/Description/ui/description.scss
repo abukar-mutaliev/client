@@ -12,10 +12,17 @@
   object-fit: cover;
 }
 
+.loader_description:first-child {
+  display: grid;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 86px;
+  width: 15%;
+}
+
 .description-btn {
   font-family: "Montserrat", sans-serif;
   display: block;
-  width: 60%;
   height: 50px;
   padding: 15px 30px;
   border-radius: 50px;
@@ -58,7 +65,7 @@
 }
 
 .description-person {
-  width: 35%;
+  width: 50%;
   margin-left: 50px;
   display: flex;
   flex-direction: column;
@@ -94,28 +101,39 @@
 
 .label {
   font-weight: 400;
-  flex: 1; /* Make label take up available space */
+  flex: 1;
+  width: 40%;
 }
 
 .value {
   font-weight: 700;
-  text-align: right;
-  margin-left: 10px;
+  text-align: left;
+  width: 55%;
+}
+.description-text {
+  display: flex;
+  justify-content: space-between;
 }
 
-.description-text {
+.loader_description {
+  margin-top: 43px;
+  width: 40%;
+  display: grid;
+  justify-content: left;
+}
+
+.description-text span {
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
-  max-width: 100%;
+  width: 70%;
   font-size: 16px;
+  max-width: 59%;
   font-weight: 500;
   line-height: 35px;
   text-align: left;
   font-family: "Montserrat", sans-serif;
-  margin-left: 42%;
-  margin-right: auto;
   padding-bottom: 5%;
 }
 
@@ -339,23 +357,25 @@ textarea {
     display: none;
   }
   .description-personName {
-    width: 90vw;
+    width: 100%;
     height: 100%;
     line-height: 60px;
     text-align: center;
     margin-top: 47px;
   }
   .description-person {
-    width: 90vw;
-    margin-left: auto;
-    margin-right: auto;
+    width: 90%;
   }
-
   .mobile-order-btn {
     display: block;
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
+  }
+  .mobile-order-loader {
+    width: 100%;
+    display: grid;
+    justify-content: center;
   }
   .description {
     width: 100%;
@@ -374,12 +394,12 @@ textarea {
     justify-content: center;
   }
   .description-img {
-    width: 100%;
     border-radius: 10px;
   }
   .description-text {
-    width: 90vw;
+    width: 90%;
     font-family: "Montserrat", sans-serif;
+    max-width: 90%;
     font-size: 16px;
     font-weight: 500;
     line-height: 35px;
@@ -442,6 +462,16 @@ textarea {
 }
 
 @media (max-width: 738px) {
+  .description-person {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .description-image-container {
+    width: 100%;
+  }
+  .description-content {
+    width: 100%;
+  }
   .modal h2 {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -453,7 +483,7 @@ textarea {
     line-height: 39px;
   }
   .description-btn {
-    width: 100%;
+    width: 90%;
   }
   .description-btn:active, .modal button:active {
     background: #282727
@@ -467,4 +497,50 @@ textarea {
   .description-title {
     font-size: 36px;
   }
+    .description-img {
+      width: 98%;
+      margin-right: auto;
+      margin-left: auto;
+  }
 }
+
+@media (max-width: 538px) {
+    .description-person {
+      width: 95%;
+    }
+    .label {
+      font-size: 15px;
+      line-height: 33px;
+    }
+    .description-content {
+      width: 100%;
+    }
+    .description-personActivity {
+      flex-wrap: wrap;
+    }
+    .description-image-container {
+      width: 100%;
+   }
+    .description-title {
+      display: none;
+   }
+    .description-personName {
+      font-size: 28px;
+    }
+    .label {
+      width: 55%;
+    }
+    .value {
+      width: 40%;
+      padding-left: 2px;
+    }
+  }
+
+
+
+@media (max-width: 388px) {
+  .description-personActivity, .label {
+    font-size: 12px;
+  }
+}
+

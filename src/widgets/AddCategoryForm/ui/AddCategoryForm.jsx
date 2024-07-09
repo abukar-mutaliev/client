@@ -1,7 +1,7 @@
 import "./addCategoryForm.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import {
   createCategory,
   updateCategory,
@@ -30,7 +30,7 @@ export function AddCategoryForm() {
     await dispatch(
       updateCategory({ id: categoryId, category_name: categoryName })
     );
-    dispatch(getCategories()); // Refresh the categories list
+    dispatch(getCategories());
     setCategoryName("");
     setCategoryId(null);
   };
@@ -56,6 +56,7 @@ export function AddCategoryForm() {
         </form>
         {error && <p>{error}</p>}
       </div>
+      <ToastContainer />
     </div>
   );
 }

@@ -104,7 +104,7 @@ export function PartnerPage() {
         </li>
       </ul>
       {emailStatus === "loading" ? (
-        <div className="loader-email">
+        <div className="mobile-order-loader">
           <BarLoader />
         </div>
       ) : (

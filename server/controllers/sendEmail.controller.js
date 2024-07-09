@@ -26,7 +26,8 @@ class SendEmailController {
           .join("")}
       </ul>
       <p><strong>ФИО Заказчика:</strong> ${comments}</p>
-      <p><strong>Контактная информация заказчика:</strong> ${contactInfo}</p>
+      <p><strong>Номер телефона заказчика:</strong> ${contactInfo.phone}</p>
+      <p><strong>Email почта заказчика:</strong> ${contactInfo.email}</p>
       <p><strong>Выбранная реклама:</strong></p>
       <ul>
         ${adDetails.map((ad) => `<li>${ad}</li>`).join("")}

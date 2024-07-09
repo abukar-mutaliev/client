@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "BMW",
+    "database": "pro_pr",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "BMW",
+    "database": "pro_pr",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "BMW",
+    "database": "pro_pr",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
+

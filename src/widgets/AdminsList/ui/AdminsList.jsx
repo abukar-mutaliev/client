@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import {
   deleteAdmin,
   fetchAdmins,
@@ -83,6 +83,7 @@ export const AdminsList = React.memo(() => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 });

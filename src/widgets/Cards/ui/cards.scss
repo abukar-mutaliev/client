@@ -3,46 +3,49 @@
   border-radius: 10px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5%;
+  margin-top: 3%;
   display: grid;
   justify-content: center;
 }
 .cards {
-  height: 452px;
   border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
+  gap: 30px;
   justify-content: center;
 }
-
+.show-more_btn {
+  text-align: center;
+}
 .title-cards {
   font-family: Organetto, sans-serif;
   font-size: 40px;
   font-weight: 700;
   unicode-bidi: isolate;
   margin-bottom: 1%;
-  margin-top: 25%;
+  margin-top: 15%;
 }
 .category-section {
   display: flow;
   justify-content: left;
 }
 .show-more {
-  width: 5%;
-  height: 470px;
+  padding: 5px;
   margin-top: 40px;
-  margin-left: 1%;
-  background: #FF8C8C;
-  line-height: 452px;
   text-align: center;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  cursor: pointer;
 }
-
+.show-more:hover {
+  transform: scale(1) translateY(0px);
+  border: 1px solid black;
+}
 .more_persons_btn {
   background: transparent;
   border: none;
   cursor: pointer;
+  padding: 10px;
 }
 @media (max-width: 912px) {
   .cards {
@@ -83,21 +86,6 @@
       margin-left: auto;
       margin-right: auto;
   }
-
-  .show-more {
-    width: 100%;
-    height: auto;
-    margin-top: 20px;
-    margin-left: 0;
-    background: #ff8c8c;
-    line-height: normal;
-    text-align: center;
-  }
-
-  .more_persons_btn img {
-    width: 30px;
-  }
-
   .cards-container {
     margin-top: 20px;
   }

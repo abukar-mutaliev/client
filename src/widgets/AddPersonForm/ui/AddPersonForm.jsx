@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { fetchRegions } from "../../../app/providers/StoreProvider/regionSlice";
 import { getCategories } from "../../../app/providers/StoreProvider/categoriesSlice";
+import { getNetworks } from "../../../app/providers/StoreProvider/networkSlice";
 import { addPerson } from "../../../app/providers/StoreProvider/personSlice";
 import addPhoto from "../../../shared/images/addPhoto.png";
 import "./addPersonForm.scss";
 
 export function AddPersonForm() {
-  const navigate = useNavigate();
   const [personPhoto, setPersonPhoto] = useState(null);
   const [personName, setPersonName] = useState("");
   const [activity, setActivity] = useState("");
@@ -19,11 +18,14 @@ export function AddPersonForm() {
     { network_name: "", followers: "" },
   ]);
   const [adPrices, setAdPrices] = useState({
-    instagram_reels_ad: null,
-    instagram_story_ad: null,
-    repost: null,
-    video_ad_by_user: null,
-    video_integration: null,
+    instagram_joint_reel: null,
+    instagram_story: null,
+    instagram_story_repost: null,
+    instagram_post: null,
+    vk_post: null,
+    telegram_post: null,
+    youtube_standard_integration: null,
+    video_greeting: null,
   });
 
   const [selectedRegion, setSelectedRegion] = useState("");
@@ -32,16 +34,31 @@ export function AddPersonForm() {
 
   const dispatch = useDispatch();
   const regions = useSelector((state) => state.regions.regions);
+  const networksData = useSelector((state) => state.networks.networks);
   const categories = useSelector((state) => state.categories.categories);
 
   useEffect(() => {
     dispatch(fetchRegions());
     dispatch(getCategories());
+    dispatch(getNetworks());
   }, [dispatch]);
 
   const handleNetworkChange = (index, event) => {
     const values = [...networks];
-    values[index][event.target.name] = event.target.value;
+    if (event.target.name === "network_id") {
+      const selectedNetwork = networksData.find(
+        (network) => network.network_id === parseInt(event.target.value, 10)
+      );
+      if (selectedNetwork) {
+        values[index].network_name = selectedNetwork.network_name;
+        values[index].network_id = event.target.value;
+      } else {
+        values[index].network_name = "";
+        values[index].network_id = "";
+      }
+    } else {
+      values[index][event.target.name] = event.target.value;
+    }
     setNetworks(values);
   };
 
@@ -84,16 +101,19 @@ export function AddPersonForm() {
       setSelectedCategory("");
       setPersonPhoto(null);
       setAdPrices({
-        instagram_reels_ad: null,
-        instagram_story_ad: null,
-        repost: null,
-        video_ad_by_user: null,
-        video_integration: null,
+        instagram_joint_reel: null,
+        instagram_story: null,
+        instagram_story_repost: null,
+        instagram_post: null,
+        vk_post: null,
+        telegram_post: null,
+        youtube_standard_integration: null,
+        video_greeting: null,
       });
-      toast.success("Клиент добавлен!");
+      toast.success("Партнер добавлен!");
     } catch (err) {
       setAddStatus("error");
-      toast.error(`Ошибка при добавления партнера: ${err}`);
+      toast.error(`Ошибка при добавлении партнера: ${err}`);
     }
   };
 
@@ -165,14 +185,6 @@ export function AddPersonForm() {
                   />
                 </div>
               )}
-
-              <input
-                type="file"
-                id="photoUpload"
-                placeholder="Загрузить фото"
-                style={{ display: "none" }}
-                onChange={(e) => setPersonPhoto(e.target.files[0])}
-              />
             </div>
             <div className="add_person">
               <input
@@ -211,11 +223,32 @@ export function AddPersonForm() {
                 <span>Добавить соцсеть</span>
                 {networks.map((network, index) => (
                   <div key={index} className="add_person_network_form">
+                    <div className="add_person_select">
+                      <select
+                        name="network_id"
+                        value={network.network_id || ""}
+                        style={{ width: "90px" }}
+                        onChange={(e) => handleNetworkChange(index, e)}
+                        required
+                      >
+                        <option value="" disabled>
+                          Соцсети
+                        </option>
+                        {networksData.map((network) => (
+                          <option
+                            key={network.network_id}
+                            value={network.network_id}
+                          >
+                            {network.network_name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                     <input
                       type="text"
                       name="network_name"
                       value={network.network_name}
-                      onChange={(e) => handleNetworkChange(index, e)}
+                      readOnly
                       placeholder="Название соцсети"
                       required
                     />
@@ -229,14 +262,14 @@ export function AddPersonForm() {
                     />
                   </div>
                 ))}
+                <button
+                  type="button"
+                  className="add_person_network-btn"
+                  onClick={handleAddNetwork}
+                >
+                  Добавить соцсеть
+                </button>
               </div>
-              <button
-                type="button"
-                className="add_person_network-btn"
-                onClick={handleAddNetwork}
-              >
-                Добавить соцсеть
-              </button>
             </div>
             <div className="add_person_select">
               <select
@@ -254,6 +287,8 @@ export function AddPersonForm() {
                   </option>
                 ))}
               </select>
+            </div>
+            <div className="add_person_select">
               <select
                 value={selectedCategory}
                 style={{ width: "120px" }}
@@ -277,65 +312,104 @@ export function AddPersonForm() {
           <div className="ad_prices_container">
             <h3>Цены на рекламу:</h3>
             <div className="ad_price_item">
-              <label htmlFor="instagram_reels_ad">
-                Instagram Reels:
+              <label htmlFor="instagram_joint_reel">
+                Совместный Reel в Instagram:
                 <input
                   type="number"
-                  id="instagram_reels_ad"
-                  name="instagram_reels_ad"
-                  value={adPrices.instagram_reels_ad || ""}
+                  id="instagram_joint_reel"
+                  name="instagram_joint_reel"
+                  value={adPrices.instagram_joint_reel || ""}
                   onChange={handleAdPriceChange}
                   placeholder="Цена"
                 />
               </label>
             </div>
             <div className="ad_price_item">
-              <label htmlFor="instagram_story_ad">
-                Instagram Story:
+              <label htmlFor="instagram_story">
+                Story в Instagram:
                 <input
                   type="number"
-                  id="instagram_story_ad"
-                  name="instagram_story_ad"
-                  value={adPrices.instagram_story_ad || ""}
+                  id="instagram_story"
+                  name="instagram_story"
+                  value={adPrices.instagram_story || ""}
                   onChange={handleAdPriceChange}
                   placeholder="Цена"
                 />
               </label>
             </div>
             <div className="ad_price_item">
-              <label htmlFor="repost">
-                Repost:
+              <label htmlFor="instagram_story_repost">
+                Repost в сторис Instagram:
                 <input
                   type="number"
-                  id="repost"
-                  name="repost"
-                  value={adPrices.repost || ""}
+                  id="instagram_story_repost"
+                  name="instagram_story_repost"
+                  value={adPrices.instagram_story_repost || ""}
                   onChange={handleAdPriceChange}
                   placeholder="Цена"
                 />
               </label>
             </div>
             <div className="ad_price_item">
-              <label htmlFor="video_ad_by_user">
-                Видеореклама от партнера:
+              <label htmlFor="instagram_post">
+                Публикация в Instagram:
                 <input
                   type="number"
-                  id="video_ad_by_user"
-                  name="video_ad_by_user"
-                  value={adPrices.video_ad_by_user || ""}
+                  id="instagram_post"
+                  name="instagram_post"
+                  value={adPrices.instagram_post || ""}
                   onChange={handleAdPriceChange}
                   placeholder="Цена"
                 />
               </label>
             </div>
             <div className="ad_price_item">
-              <label htmlFor="video_integration">
-                Интегрированная реклама:
+              <label htmlFor="vk_post">
+                Публикация в VK:
                 <input
                   type="number"
-                  id="video_integration"
-                  name="video_integration"
-                  value={adPrices.video_integration || ""}
+                  id="vk_post"
+                  name="vk_post"
+                  value={adPrices.vk_post || ""}
+                  onChange={handleAdPriceChange}
+                  placeholder="Цена"
+                />
+              </label>
+            </div>
+            <div className="ad_price_item">
+              <label htmlFor="telegram_post">
+                Публикация в Телеграм:
+                <input
+                  type="number"
+                  id="telegram_post"
+                  name="telegram_post"
+                  value={adPrices.telegram_post || ""}
+                  onChange={handleAdPriceChange}
+                  placeholder="Цена"
+                />
+              </label>
+            </div>
+            <div className="ad_price_item">
+              <label htmlFor="youtube_standard_integration">
+                Стандартная интеграция в ролике на YouTube:
+                <input
+                  type="number"
+                  id="youtube_standard_integration"
+                  name="youtube_standard_integration"
+                  value={adPrices.youtube_standard_integration || ""}
+                  onChange={handleAdPriceChange}
+                  placeholder="Цена"
+                />
+              </label>
+            </div>
+            <div className="ad_price_item">
+              <label htmlFor="video_greeting">
+                Видео привет, поздравление:
+                <input
+                  type="number"
+                  id="video_greeting"
+                  name="video_greeting"
+                  value={adPrices.video_greeting || ""}
                   onChange={handleAdPriceChange}
                   placeholder="Цена"
                 />

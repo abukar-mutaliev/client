@@ -7,10 +7,14 @@ import btnIcon from "../../../assets/icons/button.svg";
 export function Card({ item }) {
   return (
     <div className="card">
-      <img className="card-image" src={`/${item.person_photo}`} alt="img" />
+      <img
+        className="card-image"
+        src={`${item.person_photo}`}
+        alt="бойцы блогеры спортсмены "
+      />
       <span>{item.person_name}</span>
       <div className="clamp">
-        <p>{item.person_description}</p>
+        <p>{item.activity}</p>
       </div>
 
       <div className="card-description">
@@ -36,5 +40,6 @@ Card.propTypes = {
     person_name: PropTypes.string,
     person_photo: PropTypes.string,
     person_description: PropTypes.string,
+    activity: PropTypes.string,
   }).isRequired,
 };

@@ -49,9 +49,9 @@ export function PersonsCardEdit() {
       setIsLoading(true);
       setShowConfirm(false);
       setPersonToDelete(null);
-      toast.success("Клиент успешно удален!");
+      toast.success("Партнер успешно удален!");
     } catch (err) {
-      toast.error(`Ошибка при удалении клиента: ${err}`);
+      toast.error(`Ошибка при удалении партнера: ${err}`);
     }
   };
 

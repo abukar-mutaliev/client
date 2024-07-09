@@ -267,11 +267,16 @@ class PersonController {
               ...adPriceData,
             });
           } else {
-            adPrice.repost = adPriceData.repost;
+            adPrice.instagram_joint_reel = adPriceData.instagram_joint_reel;
+            adPrice.instagram_story = adPriceData.instagram_story;
+            adPrice.instagram_story_repost = adPriceData.instagram_story_repost;
+            adPrice.instagram_post = adPriceData.instagram_post;
             adPrice.video_integration = adPriceData.video_integration;
-            adPrice.video_ad_by_user = adPriceData.video_ad_by_user;
-            adPrice.instagram_story_ad = adPriceData.instagram_story_ad;
-            adPrice.instagram_reels_ad = adPriceData.instagram_reels_ad;
+            adPrice.vk_post = adPriceData.vk_post;
+            adPrice.telegram_post = adPriceData.telegram_post;
+            adPrice.youtube_standard_integration =
+              adPriceData.youtube_standard_integration;
+            adPrice.video_greeting = adPriceData.video_greeting;
             await adPrice.save();
           }
         } catch (jsonError) {

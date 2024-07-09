@@ -32,7 +32,7 @@ export const AdminForm = React.memo(({ onSubmit, showSuccessMessage }) => {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Имя пользователя"
+          placeholder="Имя админа"
           required
         />
         {errors.username && <p className="error-message">{errors.username}</p>}

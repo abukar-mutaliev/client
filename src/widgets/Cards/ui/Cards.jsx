@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
-import { Link } from "react-router-dom";
 import "./cards.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Card } from "../../../shared/ui/Card";
 import { getPersons } from "../../../app/providers/StoreProvider/personSlice";
 import { getCategories } from "../../../app/providers/StoreProvider/categoriesSlice";
-import iconMore from "../../../shared/assets/icons/right.svg";
 
 export function Cards() {
   const dispatch = useDispatch();
@@ -16,22 +15,22 @@ export function Cards() {
 
   useEffect(() => {
     dispatch(getPersons());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
 
   const handleShowMore = (categoryId) => {
     setVisibleCards((prevState) => ({
       ...prevState,
-      [categoryId]: persons.filter(
-        (person) => person.categoryCategoryId === categoryId
-      ).length,
+      [categoryId]: 4, // Показываем все карточки при нажатии на "Показать все"
     }));
   };
 
   const getVisibleCount = (categoryId) => {
+    if (window.innerWidth <= 768) {
+      // Если ширина экрана меньше или равна 768px, показываем только 2 карточки
+      return visibleCards[categoryId] || 2;
+    }
+    // Иначе показываем 4 карточки
     return visibleCards[categoryId] || 4;
   };
 
@@ -59,6 +58,8 @@ export function Cards() {
                 .map((person) => (
                   <Card key={person.person_id} item={person} />
                 ))}
+            </div>
+            <div className="show-more_btn">
               {personsInCategory.length >
                 getVisibleCount(category.category_id) && (
                 <Link
@@ -74,11 +75,7 @@ export function Cards() {
                     type="button"
                     onClick={() => handleShowMore(category.category_id)}
                   >
-                    <img
-                      style={{ width: "50px", margin: "auto" }}
-                      src={iconMore}
-                      alt="icon"
-                    />
+                    Показать еще...
                   </button>
                 </Link>
               )}

@@ -86,7 +86,7 @@ class NetworkController {
         return res.json("Неправильный networkId");
       }
 
-      const deletedNetwork = await Person.destroy({
+      const deletedNetwork = await Network.destroy({
         where: {
           network_id: networkId,
         },
