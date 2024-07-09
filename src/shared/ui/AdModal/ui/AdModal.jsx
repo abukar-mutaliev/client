@@ -328,7 +328,7 @@ AdModal.propTypes = {
   modalIsOpen: PropTypes.bool.isRequired,
   setModalIsOpen: PropTypes.func.isRequired,
   person: PropTypes.shape({
-    person_name: PropTypes.string.isRequired,
+    person_name: PropTypes.string,
     activity: PropTypes.string.isRequired,
     Networks: PropTypes.arrayOf(
       PropTypes.shape({

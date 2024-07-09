@@ -20,6 +20,8 @@ const start = async () => {
     console.log("Соединение с БД было успешно установлено");
     await sequelize.sync();
     app.use("/api", router);
+    app.use("/static", express.static(path.join(__dirname, "../build/static")));
+    app.use("/styles", express.static(path.join(__dirname, "../build/styles")));
     app.use("/image", express.static(path.resolve(__dirname, "image")));
     app.use(express.static(path.join(__dirname, "../build")));
 

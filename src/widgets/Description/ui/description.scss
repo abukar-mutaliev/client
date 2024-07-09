@@ -508,10 +508,6 @@ textarea {
     .description-person {
       width: 95%;
     }
-    .label {
-      font-size: 15px;
-      line-height: 33px;
-    }
     .description-content {
       width: 100%;
     }
@@ -528,11 +524,18 @@ textarea {
       font-size: 28px;
     }
     .label {
-      width: 55%;
+      width: 50%;
+      font-size: 13px;
+      line-height: 33px;
     }
     .value {
-      width: 40%;
+      width: 50%;
+      font-size: 13px;
       padding-left: 2px;
+    }
+    .description-text span {
+      width: 100%;
+      max-width: 100%;
     }
   }
 

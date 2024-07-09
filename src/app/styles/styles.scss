@@ -1,4 +1,35 @@
 @import './reset.scss';
+@import '../../pages/AboutPage/ui/AboutPage.scss';
+@import '../../pages/AdminPanelPage/ui/AdminPanelPage.scss';
+@import '../../pages/CategoriesPage/ui/categoriesPage.scss';
+@import '../../pages/DescriptionPage/ui/DescriptionPage.scss';
+@import '../../pages/LoginPage/ui/loginPage.scss';
+@import '../../pages/MainPage/ui/MainPage.scss';
+@import '../../pages/NotFoundPage/ui/NotFoundPage.scss';
+@import '../../pages/PartnerPage/ui/partnerPage.scss';
+@import '../../pages/RegionsPage/ui/regionsPage.scss';
+@import '../../shared/ui/AdModal/ui/adModal.scss';
+@import '../../shared/ui/Card/ui/card.scss';
+@import '../../shared/ui/Categories/ui/categories.scss';
+@import '../../shared/ui/Logo/ui/logo.scss';
+@import '../../shared/ui/NetworksCardEdit/ui/networksCardEdit.scss';
+@import '../../shared/ui/Partner/ui/contact.scss';
+@import '../../shared/ui/Regions/ui/regions.scss';
+@import '../../shared/ui/Search/ui/search.scss';
+@import '../../widgets/AddAdminForm/ui/addAdminForm.scss';
+@import '../../widgets/AddCategoryForm/ui/addCategoryForm.scss';
+@import '../../widgets/AddPersonForm/ui/addPersonForm.scss';
+@import '../../widgets/AdminsList/ui/adminsList.scss';
+@import '../../widgets/Cards/ui/cards.scss';
+@import '../../widgets/Description/ui/description.scss';
+@import '../../widgets/EditPersonModal/ui/editPersonModal.scss';
+@import '../../widgets/Footer/ui/footer.scss';
+@import '../../widgets/MobileSearch/ui/mobileSearch.scss';
+@import '../../widgets/Navbar/ui/Navbar.scss';
+@import '../../widgets/PartnerModal/ui/partnerModal.scss';
+@import '../../widgets/PersonsCardEdit/ui/personsCardEdit.scss';
+@import '../../widgets/Slider/ui/customSlide.scss';
+
 @font-face {
   font-family: 'Montserrat';
   src: url('../../../fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
