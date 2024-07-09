@@ -76,7 +76,7 @@ export function Description() {
         <div className="description-content">
           <div className="description-image-container">
             <img
-              src={`${person.person_photo}`}
+              src={`http://localhost:5000/${person.person_photo}`}
               alt="img"
               className="description-img"
             />

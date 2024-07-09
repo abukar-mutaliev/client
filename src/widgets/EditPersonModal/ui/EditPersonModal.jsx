@@ -221,57 +221,93 @@ export function EditPersonModal({
           <div className="ad_prices_container">
             <h3>Цены на рекламу</h3>
             <div className="ad_price_item">
-              <span>Репост</span>
+              <span>Совместный Reel в Instagram:</span>
               <input
                 type="number"
-                value={adPrices.repost || ""}
-                onChange={(e) => handleAdPriceChange("repost", e.target.value)}
-                placeholder="Цена репоста"
+                value={adPrices.instagram_joint_reel || ""}
+                onChange={(e) =>
+                  handleAdPriceChange("instagram_joint_reel", e.target.value)
+                }
+                placeholder="Цена"
                 required
               />
             </div>
             <div className="ad_price_item">
-              <span>Видео интеграция</span>
+              <span>Story в Instagram:</span>
               <input
                 type="number"
-                value={adPrices.video_integration || ""}
+                value={adPrices.instagram_story || ""}
                 onChange={(e) =>
-                  handleAdPriceChange("video_integration", e.target.value)
+                  handleAdPriceChange("instagram_story", e.target.value)
                 }
-                placeholder="Цена видеоинтеграции"
+                placeholder="Цена"
               />
             </div>
             <div className="ad_price_item">
-              <span>Видео реклама</span>
+              <span>Repost в сторис Instagram:</span>
               <input
                 type="number"
-                value={adPrices.video_ad_by_user || ""}
+                value={adPrices.instagram_story_repost || ""}
                 onChange={(e) =>
-                  handleAdPriceChange("video_ad_by_user", e.target.value)
+                  handleAdPriceChange("instagram_story_repost", e.target.value)
                 }
-                placeholder="Цена видео рекламы"
+                placeholder="Цена"
               />
             </div>
             <div className="ad_price_item">
-              <span>Instagram Story реклама </span>
+              <span>Публикация в Instagram:</span>
               <input
                 type="number"
-                value={adPrices.instagram_story_ad || ""}
+                value={adPrices.instagram_post || ""}
                 onChange={(e) =>
-                  handleAdPriceChange("instagram_story_ad", e.target.value)
+                  handleAdPriceChange("instagram_post", e.target.value)
                 }
-                placeholder="Цена Instagram Story рекламы"
+                placeholder="Цена"
               />
             </div>
             <div className="ad_price_item">
-              <span> Instagram Reels реклама</span>
+              <span> Публикация в VK:</span>
               <input
                 type="number"
-                value={adPrices.instagram_reels_ad || ""}
+                value={adPrices.vk_post || ""}
+                onChange={(e) => handleAdPriceChange("vk_post", e.target.value)}
+                placeholder="Цена"
+              />
+            </div>
+            <div className="ad_price_item">
+              <span> Публикация в Телеграм:</span>
+              <input
+                type="number"
+                value={adPrices.telegram_post || ""}
                 onChange={(e) =>
-                  handleAdPriceChange("instagram_reels_ad", e.target.value)
+                  handleAdPriceChange("telegram_post", e.target.value)
                 }
-                placeholder="Цена Instagram Reels рекламы"
+                placeholder="Цена"
+              />
+            </div>
+            <div className="ad_price_item">
+              <span> Стандартная интеграция в ролике на YouTube:</span>
+              <input
+                type="number"
+                value={adPrices.youtube_standard_integration || ""}
+                onChange={(e) =>
+                  handleAdPriceChange(
+                    "youtube_standard_integration",
+                    e.target.value
+                  )
+                }
+                placeholder="Цена"
+              />
+            </div>
+            <div className="ad_price_item">
+              <span>Видео привет, поздравление:</span>
+              <input
+                type="number"
+                value={adPrices.video_greeting || ""}
+                onChange={(e) =>
+                  handleAdPriceChange("video_greeting", e.target.value)
+                }
+                placeholder="Цена"
               />
             </div>
           </div>
