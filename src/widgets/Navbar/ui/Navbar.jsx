@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
 import { Categories } from "../../../shared/ui/Categories";
 import { Logo } from "../../../shared/ui/Logo";
 import { Search } from "../../../shared/ui/Search";
@@ -76,8 +77,12 @@ export function Navbar() {
           </button>
         </div>
       </div>
-
-      {isSearchVisible && (
+      <CSSTransition
+        in={isSearchVisible}
+        timeout={300}
+        classNames="fade"
+        unmountOnExit
+      >
         <div className="full-screen-search">
           <button
             type="button"
@@ -93,9 +98,13 @@ export function Navbar() {
           </button>
           <MobileSearch closeSearch={() => setSearchVisible(false)} />
         </div>
-      )}
-
-      {isMenuVisible && (
+      </CSSTransition>
+      <CSSTransition
+        in={isMenuVisible}
+        timeout={300}
+        classNames="fade"
+        unmountOnExit
+      >
         <div className="full-screen-menu">
           <button
             type="button"
@@ -151,7 +160,7 @@ export function Navbar() {
             </Link>
           </div>
         </div>
-      )}
+      </CSSTransition>
     </div>
   );
 }
