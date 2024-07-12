@@ -38,7 +38,7 @@ export function AddCategoryForm() {
   return (
     <div className="add-category_form">
       <div className="add-category_container">
-        <h4>Добавить Категорию</h4>
+        <h4>Добавление Категории</h4>
       </div>
       <div className="add-category_input">
         <form onSubmit={handleSubmit}>

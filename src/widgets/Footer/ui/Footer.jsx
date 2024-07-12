@@ -3,6 +3,7 @@ import "./footer.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCategories } from "../../../app/providers/StoreProvider/categoriesSlice";
+import logo from "../../../shared/ui/Logo/ui/logo.svg";
 
 export function Footer(props) {
   const categories = useSelector((state) => state.categories.categories);
@@ -14,7 +15,9 @@ export function Footer(props) {
   return (
     <div className="footer-body">
       <div className="footer">
-        <p className="footer_logo"> LOGO</p>
+        <p className="footer_logo">
+          <img style={{ width: "200px" }} src={logo} alt="logo" />
+        </p>
         <div className="footer_categories">
           {categories.map((item) => (
             <Link to={`/categories/${item.category_id}`} key={item.category_id}>

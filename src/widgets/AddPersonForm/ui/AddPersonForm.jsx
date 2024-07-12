@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Cropper from "react-easy-crop";
 import { fetchRegions } from "../../../app/providers/StoreProvider/regionSlice";
 import { getCategories } from "../../../app/providers/StoreProvider/categoriesSlice";
 import { getNetworks } from "../../../app/providers/StoreProvider/networkSlice";
+import getCroppedImg from "./cropImage";
 import { addPerson } from "../../../app/providers/StoreProvider/personSlice";
 import addPhoto from "../../../shared/images/addPhoto.png";
 import "./addPersonForm.scss";
@@ -15,7 +18,7 @@ export function AddPersonForm() {
   const [achievements, setAchievements] = useState("");
   const [description, setDescription] = useState("");
   const [networks, setNetworks] = useState([
-    { network_name: "", followers: "" },
+    { network_name: "", followers: "", network_link: "" },
   ]);
   const [adPrices, setAdPrices] = useState({
     instagram_joint_reel: null,
@@ -27,10 +30,13 @@ export function AddPersonForm() {
     youtube_standard_integration: null,
     video_greeting: null,
   });
-
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [addStatus, setAddStatus] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [cropData, setCropData] = useState(null);
 
   const dispatch = useDispatch();
   const regions = useSelector((state) => state.regions.regions);
@@ -71,35 +77,42 @@ export function AddPersonForm() {
   };
 
   const handleAddNetwork = () => {
-    setNetworks([...networks, { network_name: "", followers: "" }]);
+    setNetworks([
+      ...networks,
+      { network_name: "", followers: "", network_link: "" },
+    ]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("image", personPhoto);
-    formData.append("person_name", personName);
-    formData.append("activity", activity);
-    formData.append("achievements", achievements);
-    formData.append("person_description", description);
-    formData.append("regionRegionId", selectedRegion);
-    formData.append("categoryCategoryId", selectedCategory);
-    formData.append("networks", JSON.stringify(networks));
-    formData.append("ad_prices", JSON.stringify(adPrices));
-
     try {
-      await dispatch(addPerson(formData));
+      const croppedImage = await getCroppedImg(
+        personPhoto,
+        croppedAreaPixels,
+        500,
+        400
+      );
+      const formData = new FormData();
+      formData.append("image", croppedImage);
+      formData.append("person_name", personName);
+      formData.append("activity", activity);
+      formData.append("achievements", achievements);
+      formData.append("person_description", description);
+      formData.append("regionRegionId", selectedRegion);
+      formData.append("categoryCategoryId", selectedCategory);
+      formData.append("networks", JSON.stringify(networks));
+      formData.append("ad_prices", JSON.stringify(adPrices));
+
+      dispatch(addPerson(formData));
       setAddStatus("success");
-      setPersonPhoto("");
+      setPersonPhoto(null);
       setPersonName("");
       setActivity("");
       setAchievements("");
       setDescription("");
-      setNetworks([{ network_name: "", followers: "" }]);
+      setNetworks([{ network_name: "", followers: "", network_link: "" }]);
       setSelectedRegion("");
       setSelectedCategory("");
-      setPersonPhoto(null);
       setAdPrices({
         instagram_joint_reel: null,
         instagram_story: null,
@@ -121,6 +134,103 @@ export function AddPersonForm() {
     document.getElementById("photoUpload").click();
   };
 
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
+
+  const handlePhotoChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const fileURL = URL.createObjectURL(file);
+      setPersonPhoto(fileURL);
+      setCropData(null);
+    }
+  };
+
+  const renderPhotoUpload = () => {
+    if (personPhoto === null) {
+      return (
+        <div
+          onClick={handlePhotoClick}
+          style={{ cursor: "pointer", width: 160, height: 160 }}
+        >
+          <img
+            alt="img"
+            src={addPhoto}
+            style={{
+              width: 160,
+              height: 160,
+              borderRadius: "10px",
+              objectFit: "cover",
+            }}
+          />
+          <input
+            type="file"
+            id="photoUpload"
+            placeholder="Загрузить фото"
+            style={{ display: "none" }}
+            onChange={handlePhotoChange}
+          />
+          <p
+            style={{
+              fontSize: "12px",
+              fontFamily: "Montserrat, sans-serif",
+              textAlign: "center",
+              marginTop: "-20px",
+            }}
+          >
+            Загрузить фото
+          </p>
+        </div>
+      );
+    }
+
+    return (
+      <div
+        onClick={handlePhotoClick}
+        style={{ cursor: "pointer", width: 160, height: 160 }}
+      >
+        {cropData ? (
+          <img
+            alt="img"
+            src={cropData}
+            style={{
+              width: 160,
+              height: 160,
+              borderRadius: "10px",
+              objectFit: "cover",
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              position: "relative",
+              width: 160,
+              height: 160,
+            }}
+          >
+            <Cropper
+              image={personPhoto}
+              crop={crop}
+              zoom={zoom}
+              aspect={500 / 400} // соотношение сторон для исходного разрешения
+              onCropChange={setCrop}
+              onCropComplete={onCropComplete}
+              onZoomChange={setZoom}
+            />
+          </div>
+        )}
+        <input
+          type="file"
+          id="photoUpload"
+          placeholder="Загрузить фото"
+          style={{ display: "none" }}
+          onChange={handlePhotoChange}
+        />
+      </div>
+    );
+  };
+
   return (
     <div className="add_person-body">
       <div className="add_person-form">
@@ -129,63 +239,7 @@ export function AddPersonForm() {
       <div className="form_container">
         <form onSubmit={handleSubmit}>
           <div className="add_person_container">
-            <div>
-              {personPhoto === null ? (
-                <div
-                  onClick={handlePhotoClick}
-                  style={{ cursor: "pointer", width: "158px" }}
-                >
-                  <img
-                    alt="img"
-                    src={addPhoto}
-                    style={{
-                      width: "158px",
-                      borderRadius: "10px",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <input
-                    type="file"
-                    id="photoUpload"
-                    placeholder="Загрузить фото"
-                    style={{ display: "none" }}
-                    onChange={(e) => setPersonPhoto(e.target.files[0])}
-                  />
-                  <p
-                    style={{
-                      fontSize: "12px",
-                      fontFamily: "Montserrat, sans serif",
-                      textAlign: "center",
-                      marginTop: "-20px",
-                    }}
-                  >
-                    Загрузить фото
-                  </p>
-                </div>
-              ) : (
-                <div
-                  onClick={handlePhotoClick}
-                  style={{ cursor: "pointer", width: "158px" }}
-                >
-                  <img
-                    alt="img"
-                    src={personPhoto ? URL.createObjectURL(personPhoto) : ""}
-                    style={{
-                      width: "158px",
-                      borderRadius: "10px",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <input
-                    type="file"
-                    id="photoUpload"
-                    placeholder="Загрузить фото"
-                    style={{ display: "none" }}
-                    onChange={(e) => setPersonPhoto(e.target.files[0])}
-                  />
-                </div>
-              )}
-            </div>
+            <div>{renderPhotoUpload()}</div>
             <div className="add_person">
               <input
                 type="text"
@@ -258,6 +312,14 @@ export function AddPersonForm() {
                       value={network.followers}
                       onChange={(e) => handleNetworkChange(index, e)}
                       placeholder="Подписчики"
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="network_link"
+                      value={network.network_link}
+                      onChange={(e) => handleNetworkChange(index, e)}
+                      placeholder="Ссылка на соцсеть"
                       required
                     />
                   </div>

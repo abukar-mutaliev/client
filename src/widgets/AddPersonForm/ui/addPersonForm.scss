@@ -11,6 +11,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  gap: 20px;
 }
  .add_person-form {
    width: 70%;
@@ -71,12 +72,13 @@
 }
 .add_person_network {
   width: 70%;
-  margin-top: 3%;
+  margin-top: 40px;
   display: grid;
   font-family: 'Montserrat', sans-serif;
 }
 .add_person_network_form {
   display: flex;
+  flex-direction: column;
 }
 
 .add_person_network-btn {

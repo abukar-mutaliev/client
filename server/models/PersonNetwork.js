@@ -23,6 +23,7 @@ PersonNetwork.init(
     },
     followers: DataTypes.INTEGER,
     network_name: DataTypes.STRING,
+    network_link: DataTypes.STRING,
   },
   {
     sequelize,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
@@ -23,6 +23,8 @@ export function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const regions = useSelector((state) => state.regions.regions);
+  const searchRef = useRef(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     dispatch(fetchRegions());
@@ -47,6 +49,9 @@ export function Navbar() {
       navigate(`/categories/${selectedCategoryId}`);
     }
   };
+  const sortedCategories = categories
+    ?.slice()
+    .sort((a, b) => a.category_name.localeCompare(b.category_name));
 
   return (
     <div className="navbar">
@@ -82,8 +87,9 @@ export function Navbar() {
         timeout={300}
         classNames="fade"
         unmountOnExit
+        nodeRef={searchRef}
       >
-        <div className="full-screen-search">
+        <div className="full-screen-search" ref={searchRef}>
           <button
             type="button"
             aria-label="Close menu"
@@ -104,8 +110,9 @@ export function Navbar() {
         timeout={300}
         classNames="fade"
         unmountOnExit
+        nodeRef={menuRef}
       >
-        <div className="full-screen-menu">
+        <div className="full-screen-menu" ref={menuRef}>
           <button
             type="button"
             aria-label="Close menu"
@@ -124,7 +131,7 @@ export function Navbar() {
                 <option className="mobile-dropdown_option" value="" disabled>
                   Категории
                 </option>
-                {categories.map((category) => (
+                {sortedCategories?.map((category) => (
                   <option
                     key={category.category_id}
                     value={category.category_id}

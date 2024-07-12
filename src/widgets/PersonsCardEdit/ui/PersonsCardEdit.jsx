@@ -84,10 +84,13 @@ export function PersonsCardEdit() {
       cancelDelete();
     }
   };
+  const sortedPersons = persons
+    .slice()
+    .sort((a, b) => a.person_name?.localeCompare(b.person_name));
 
   return (
     <div className="admin_cards">
-      {persons.map((item) => (
+      {sortedPersons.map((item) => (
         <div key={item?.person_id} className="card-container">
           <Card item={item} />
           <div className="card_edit_btn">

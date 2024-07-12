@@ -80,7 +80,6 @@ export function AdModal({
 
     const emailData = {
       name: person?.person_name,
-      activity: person?.activity,
       networks: personNetworks?.map((network) => ({
         network_name: network?.PersonNetwork.network_name,
         followers: network?.PersonNetwork.followers,
@@ -329,7 +328,6 @@ AdModal.propTypes = {
   setModalIsOpen: PropTypes.func.isRequired,
   person: PropTypes.shape({
     person_name: PropTypes.string,
-    activity: PropTypes.string.isRequired,
     Networks: PropTypes.arrayOf(
       PropTypes.shape({
         network_id: PropTypes.number.isRequired,
@@ -349,7 +347,7 @@ AdModal.propTypes = {
     telegram_post: PropTypes.number,
     youtube_standard_integration: PropTypes.number,
     video_greeting: PropTypes.number,
-  }).isRequired,
+  }),
   personNetworks: PropTypes.arrayOf(
     PropTypes.shape({
       network_id: PropTypes.number.isRequired,

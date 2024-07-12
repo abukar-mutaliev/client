@@ -15,6 +15,7 @@ module.exports = {
   },
   plugins: ["react", "react-hooks", "unused-imports"],
   rules: {
+    "jsx-a11y/label-has-associated-control": "off",
     "no-console": "off",
     "no-restricted-syntax": [
       "error",

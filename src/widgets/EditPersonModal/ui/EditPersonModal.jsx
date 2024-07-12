@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import "./editPersonModal.scss";
 import { toast, ToastContainer } from "react-toastify";
 import uploadIcon from "../../../shared/assets/icons/upload.svg";
@@ -20,20 +20,14 @@ export function EditPersonModal({
   const [category, setCategory] = useState(person.categoryCategoryId);
   const [region, setRegion] = useState(person.regionRegionId);
   const [networks, setNetworks] = useState(person.Networks || []);
-  const [adPrices, setAdPrices] = useState(person?.AdPrice);
+  const [adPrices, setAdPrices] = useState(person.AdPrice || {});
 
   const handleNetworkChange = (index, field, value) => {
     const newNetworks = networks.map((network, i) => {
       if (i === index) {
-        if (field === "followers") {
-          return {
-            ...network,
-            PersonNetwork: { ...network.PersonNetwork, followers: value },
-          };
-        }
         return {
           ...network,
-          PersonNetwork: { ...network.PersonNetwork, network_name: value },
+          PersonNetwork: { ...network.PersonNetwork, [field]: value },
         };
       }
       return network;
@@ -42,7 +36,9 @@ export function EditPersonModal({
   };
 
   const handleAddNetwork = () => {
-    const newNetwork = { PersonNetwork: { network_name: "", followers: "" } };
+    const newNetwork = {
+      PersonNetwork: { network_name: "", followers: "", network_link: "" },
+    };
     setNetworks([...networks, newNetwork]);
   };
 
@@ -71,6 +67,7 @@ export function EditPersonModal({
           network_id: network.network_id,
           network_name: network.PersonNetwork.network_name,
           followers: network.PersonNetwork.followers,
+          network_link: network.PersonNetwork.network_link,
         }))
       );
       formData.append("networks", serializedNetworks);
@@ -113,7 +110,7 @@ export function EditPersonModal({
         <span className="modal_edit-close" onClick={onClose}>
           &times;
         </span>
-        <h2>Редактировать Партнера</h2>
+        <h2>Редактирование Партнера</h2>
         <form>
           <span>Имя</span>
           <input
@@ -206,6 +203,15 @@ export function EditPersonModal({
                     handleNetworkChange(index, "followers", e.target.value)
                   }
                   placeholder="Количество подписчиков"
+                  required
+                />
+                <input
+                  type="text"
+                  value={network.PersonNetwork.network_link}
+                  onChange={(e) =>
+                    handleNetworkChange(index, "network_link", e.target.value)
+                  }
+                  placeholder="Ссылка на соцсеть"
                   required
                 />
               </div>
@@ -312,11 +318,7 @@ export function EditPersonModal({
             </div>
           </div>
           <div className="button-group">
-            <button
-              type="button"
-              className="card_edit_btn"
-              onClick={handleSave}
-            >
+            <button type="button" className="btn_submit" onClick={handleSave}>
               Сохранить
             </button>
           </div>
@@ -344,15 +346,32 @@ EditPersonModal.propTypes = {
           followers: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
             .isRequired,
           network_name: PropTypes.string.isRequired,
+          network_link: PropTypes.string.isRequired,
         }).isRequired,
       })
     ),
-    AdPrice: PropTypes.arrayOf(
-      PropTypes.arrayOf({
-        type: PropTypes.string,
-        price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      })
-    ),
+    AdPrice: PropTypes.shape({
+      instagram_joint_reel: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]),
+      instagram_story: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]),
+      instagram_story_repost: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]),
+      instagram_post: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      vk_post: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      telegram_post: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      youtube_standard_integration: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]),
+      video_greeting: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    }),
   }).isRequired,
   onClose: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,

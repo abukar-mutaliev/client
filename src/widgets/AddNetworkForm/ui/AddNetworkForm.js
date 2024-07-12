@@ -19,9 +19,9 @@ export function AddNetworkForm() {
   };
 
   return (
-    <div className="add-category_form">
-      <div className="add-category_container">
-        <h4>Добавить соцсеть</h4>
+    <div className="add-category_input">
+      <div className="admin-form-container">
+        <h4>Добавление соцсети</h4>
       </div>
       <div className="add-category_input">
         <form onSubmit={handleSubmit}>
@@ -35,7 +35,9 @@ export function AddNetworkForm() {
               required
             />
           </div>
-          <button type="submit">Добавить</button>
+          <button className="btn_submit" type="submit">
+            Добавить
+          </button>
         </form>
       </div>
       <ToastContainer />

@@ -43,13 +43,13 @@ class NetworkController {
   async updateNetwork(req, res, next) {
     try {
       const networkId = req.params.id;
-      const { network_name, followers } = req.body;
+      const { network_name, followers, network_link } = req.body;
 
       if (!networkId || isNaN(networkId)) {
         return res.json("Неправильный ID социальной сети");
       }
 
-      if (!network_name && !followers) {
+      if (!network_name && !followers && !network_link) {
         return next(ApiError.badRequest("Не указаны данные для обновления"));
       }
 
@@ -64,6 +64,9 @@ class NetworkController {
       }
       if (followers) {
         network.followers = followers;
+      }
+      if (network_link) {
+        network.network_link = network_link;
       }
 
       await network.save();

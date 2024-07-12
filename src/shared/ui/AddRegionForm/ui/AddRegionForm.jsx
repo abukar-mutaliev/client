@@ -27,7 +27,7 @@ export function AddRegionForm() {
   return (
     <div className="add-category_form">
       <div className="add-category_container">
-        <h4>Добавить регион</h4>
+        <h4>Добавление региона</h4>
       </div>
       <div className="add-category_input">
         <form onSubmit={handleSubmit}>

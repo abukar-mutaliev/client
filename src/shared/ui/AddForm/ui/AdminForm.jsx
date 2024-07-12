@@ -26,7 +26,7 @@ export const AdminForm = React.memo(({ onSubmit, showSuccessMessage }) => {
 
   return (
     <form className="admin-form" onSubmit={handleSubmit}>
-      <h2>Добавить Админа</h2>
+      <h2>Добавление Админа</h2>
       <div className="form-group">
         <input
           type="text"

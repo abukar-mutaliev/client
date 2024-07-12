@@ -35,6 +35,10 @@ export function Categories() {
     );
   }
 
+  const sortedCategories = categories
+    ?.slice()
+    .sort((a, b) => a.category_name.localeCompare(b.category_name));
+
   return (
     <div className="dropdown_menu">
       <select
@@ -45,7 +49,7 @@ export function Categories() {
         <option className="dropdown_option" value="" disabled>
           Категории
         </option>
-        {categories?.map((category) => (
+        {sortedCategories?.map((category) => (
           <option key={category.category_id} value={category.category_id}>
             {category.category_name}
           </option>

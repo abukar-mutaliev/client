@@ -21,12 +21,14 @@ export function RegionsPage() {
     dispatch(fetchRegions());
   }, [dispatch]);
 
-  const filteredPersons = persons.filter(
-    (person) => person.regionRegionId === Number(id)
-  );
-  const regionName = regions.find(
-    (region) => region.region_id === Number(id)
-  )?.region_name;
+  const filteredPersons = persons
+    .filter((person) => person.regionRegionId === Number(id))
+    .sort((a, b) => a.person_name.localeCompare(b.person_name));
+
+  const regionName = regions
+    .slice()
+    .sort((a, b) => a.region_name.localeCompare(b.region_name))
+    .find((region) => region.region_id === Number(id))?.region_name;
 
   if (!regions.length) {
     return (

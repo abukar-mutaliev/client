@@ -40,10 +40,10 @@ class PersonController {
 
       const networkArray = JSON.parse(networks);
       await Promise.all(
-        networkArray.map(async ({ network_name, followers }) => {
-          if (!network_name || !followers) {
+        networkArray.map(async ({ network_name, followers, network_link }) => {
+          if (!network_name || !followers || !network_link) {
             console.warn(
-              `Некорректные данные для сети: network_name=${network_name}, followers=${followers}`
+              `Некорректные данные для сети: network_name=${network_name}, followers=${followers}, network_link=${network_link}`
             );
             return;
           }
@@ -69,6 +69,7 @@ class PersonController {
             networkNetworkId: network.network_id,
             followers,
             network_name,
+            network_link,
           });
         })
       );
@@ -97,7 +98,7 @@ class PersonController {
           {
             model: Network,
             through: {
-              attributes: ["followers", "network_name"],
+              attributes: ["followers", "network_name", "network_link"],
             },
           },
           {
@@ -149,7 +150,7 @@ class PersonController {
           {
             model: Network,
             through: {
-              attributes: ["followers", "network_name"],
+              attributes: ["followers", "network_name", "network_link"],
             },
           },
           {
@@ -208,43 +209,49 @@ class PersonController {
           const networkData = JSON.parse(networks);
 
           await Promise.all(
-            networkData.map(async ({ network_id, followers, network_name }) => {
-              if (!network_id) {
-                console.warn("network_id is undefined. Skipping this network.");
-                return;
-              }
+            networkData.map(
+              async ({ network_id, followers, network_name, network_link }) => {
+                if (!network_id) {
+                  console.warn(
+                    "network_id is undefined. Skipping this network."
+                  );
+                  return;
+                }
 
-              let network = await Network.findByPk(network_id);
+                let network = await Network.findByPk(network_id);
 
-              if (!network) {
-                console.warn(
-                  `Соцсеть с id ${network_id} не найдена, создаем новую.`
-                );
-                network = await Network.create({
-                  network_name,
+                if (!network) {
+                  console.warn(
+                    `Соцсеть с id ${network_id} не найдена, создаем новую.`
+                  );
+                  network = await Network.create({
+                    network_name,
+                  });
+                }
+
+                let personNetwork = await PersonNetworks.findOne({
+                  where: {
+                    personPersonId: existingPerson.person_id,
+                    networkNetworkId: network_id,
+                  },
                 });
-              }
 
-              let personNetwork = await PersonNetworks.findOne({
-                where: {
-                  personPersonId: existingPerson.person_id,
-                  networkNetworkId: network_id,
-                },
-              });
-
-              if (!personNetwork) {
-                personNetwork = await PersonNetworks.create({
-                  personPersonId: existingPerson.person_id,
-                  networkNetworkId: network_id,
-                  followers,
-                  network_name,
-                });
-              } else {
-                personNetwork.followers = followers;
-                personNetwork.network_name = network_name;
-                await personNetwork.save();
+                if (!personNetwork) {
+                  personNetwork = await PersonNetworks.create({
+                    personPersonId: existingPerson.person_id,
+                    networkNetworkId: network_id,
+                    followers,
+                    network_name,
+                    network_link,
+                  });
+                } else {
+                  personNetwork.followers = followers;
+                  personNetwork.network_name = network_name;
+                  personNetwork.network_link = network_link;
+                  await personNetwork.save();
+                }
               }
-            })
+            )
           );
         } catch (jsonError) {
           console.error("Error parsing networks JSON:", jsonError);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getPerson,
@@ -101,13 +101,26 @@ export function Description() {
               <span className="value">{person.achievements}</span>
             </div>
             {personNetworks.map((item) => (
-              <div key={item.network_id} className="description-personActivity">
-                <span className="label">
-                  Подписчики в {item.PersonNetwork.network_name}:
-                </span>
-                <span className="value">
-                  {item.PersonNetwork ? item.PersonNetwork.followers : "N/A"}
-                </span>
+              <div key={item.network_id}>
+                <div className="description-personActivity">
+                  <span className="label">
+                    Подписчики в {item.PersonNetwork.network_name}:
+                  </span>
+                  <span className="value">
+                    {item.PersonNetwork ? item.PersonNetwork.followers : "N/A"}
+                  </span>
+                </div>
+                <div className="description-personActivity">
+                  <span className="label">
+                    Страница в {item.PersonNetwork.network_name}:
+                  </span>
+                  <Link
+                    to={item.PersonNetwork.network_link}
+                    className="network_link value"
+                  >
+                    {item.PersonNetwork ? person.person_name : "N/A"}
+                  </Link>
+                </div>
               </div>
             ))}
           </div>

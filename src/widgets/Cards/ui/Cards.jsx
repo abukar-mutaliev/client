@@ -21,16 +21,14 @@ export function Cards() {
   const handleShowMore = (categoryId) => {
     setVisibleCards((prevState) => ({
       ...prevState,
-      [categoryId]: 4, // Показываем все карточки при нажатии на "Показать все"
+      [categoryId]: 4,
     }));
   };
 
   const getVisibleCount = (categoryId) => {
     if (window.innerWidth <= 768) {
-      // Если ширина экрана меньше или равна 768px, показываем только 2 карточки
       return visibleCards[categoryId] || 2;
     }
-    // Иначе показываем 4 карточки
     return visibleCards[categoryId] || 4;
   };
 
@@ -42,12 +40,21 @@ export function Cards() {
     );
   }
 
+  // Сортируем категории по алфавитному порядку
+  const sortedCategories = categories
+    .slice()
+    .sort((a, b) => a.category_name.localeCompare(b.category_name));
+
   return (
     <div className="cards-container">
-      {categories.map((category) => {
-        const personsInCategory = persons.filter(
-          (person) => person.categoryCategoryId === category.category_id
-        );
+      {sortedCategories.map((category) => {
+        // Сортируем карточки в каждой категории по имени
+        const personsInCategory = persons
+          .filter(
+            (person) => person.categoryCategoryId === category.category_id
+          )
+          .sort((a, b) => a.person_name.localeCompare(b.person_name));
+
         if (personsInCategory.length === 0) return null;
         return (
           <div key={category.category_id} className="category-section">

@@ -22,12 +22,14 @@ export function CategoriesPage() {
     dispatch(getCategories());
   }, [dispatch]);
 
-  const filteredPersons = persons.filter(
-    (person) => person.categoryCategoryId === Number(id)
-  );
-  const categoryName = categories.find(
-    (category) => category.category_id === Number(id)
-  )?.category_name;
+  const filteredPersons = persons
+    .filter((person) => person.categoryCategoryId === Number(id))
+    .sort((a, b) => a.person_name.localeCompare(b.person_name));
+
+  const categoryName = categories
+    .slice()
+    .sort((a, b) => a.category_name.localeCompare(b.category_name))
+    .find((category) => category.category_id === Number(id))?.category_name;
 
   if (!categories.length) {
     return (

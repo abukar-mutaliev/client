@@ -110,6 +110,9 @@
   text-align: left;
   width: 55%;
 }
+.network_link {
+  text-decoration: none;
+}
 .description-text {
   display: flex;
   justify-content: space-between;
@@ -469,6 +472,9 @@ textarea {
   .description-image-container {
     width: 100%;
   }
+  .description-person {
+       width: 95vw;
+  }
   .description-content {
     width: 100%;
     justify-content: center;
@@ -503,11 +509,24 @@ textarea {
       margin-right: auto;
       margin-left: auto;
   }
+  .label {
+    width: 50%;
+    font-size: 13px;
+    line-height: 33px;
+  }
+  .value {
+    width: 50%;
+    font-size: 13px;
+    padding-left: 2px;
+  }
 }
 
 @media (max-width: 538px) {
+    .description {
+      width: 100%;
+    }
     .description-person {
-      width: 95%;
+      width: 95vw;
     }
     .description-content {
       width: 100%;
@@ -534,17 +553,25 @@ textarea {
       font-size: 13px;
       padding-left: 2px;
     }
+    .description-text {
+      width: 100%;
+      max-width: 95%;
+    }
     .description-text span {
       width: 100%;
       max-width: 100%;
     }
   }
 
-
+@media (max-width: 445px) {
+  .description-personActivity, .label, .value {
+    font-size: 10px;
+  }
+}
 
 @media (max-width: 388px) {
-  .description-personActivity, .label {
-    font-size: 12px;
+  .description-personActivity, .label, .value {
+    font-size: 10px;
   }
 }
 
