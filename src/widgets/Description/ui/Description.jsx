@@ -67,6 +67,13 @@ export function Description() {
     setModalIsOpen(true);
   };
 
+  const formatLink = (link) => {
+    if (link.startsWith("http://") || link.startsWith("https://")) {
+      return link;
+    }
+    return `https://${link}`;
+  };
+
   return (
     <div className="description">
       <div className="description-container">
@@ -115,7 +122,7 @@ export function Description() {
                     Страница в {item.PersonNetwork.network_name}:
                   </span>
                   <Link
-                    to={item.PersonNetwork.network_link}
+                    to={formatLink(item.PersonNetwork.network_link)}
                     className="network_link value"
                   >
                     {item.PersonNetwork ? person.person_name : "N/A"}
