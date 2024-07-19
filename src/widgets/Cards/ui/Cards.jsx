@@ -40,13 +40,10 @@ export function Cards() {
     );
   }
 
-  const sortedCategories = categories
-    .slice()
-    .sort((a, b) => a.category_name.localeCompare(b.category_name));
 
   return (
     <div className="cards-container">
-      {sortedCategories.map((category) => {
+      {categories.map((category) => {
         const personsInCategory = persons
           .filter(
             (person) => person.categoryCategoryId === category.category_id
