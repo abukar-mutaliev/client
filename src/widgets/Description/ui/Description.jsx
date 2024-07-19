@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getPerson,
@@ -121,12 +121,17 @@ export function Description() {
                   <span className="label">
                     Страница в {item.PersonNetwork.network_name}:
                   </span>
-                  <Link
-                    to={formatLink(item.PersonNetwork.network_link)}
+                  <a
+                    href={formatLink(
+                      item.PersonNetwork.network_link,
+                      item.PersonNetwork.network_name
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="network_link value"
                   >
                     {item.PersonNetwork ? person.person_name : "N/A"}
-                  </Link>
+                  </a>
                 </div>
               </div>
             ))}

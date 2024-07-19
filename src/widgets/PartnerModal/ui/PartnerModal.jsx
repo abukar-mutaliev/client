@@ -68,7 +68,7 @@ export function PartnerModal({ isOpen, onSubmit, setModalIsOpen }) {
   };
 
   const handleCloseModal = (e) => {
-    if (e.target.classList.contains("modal-overlay")) {
+    if (!e || e.target.classList.contains("modal-overlay")) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       setModalIsOpen(false);
     }
@@ -95,7 +95,7 @@ export function PartnerModal({ isOpen, onSubmit, setModalIsOpen }) {
             <input
               type="text"
               name="firstName"
-              placeholder="Ваше имя"
+              placeholder="Имя"
               value={formData.firstName}
               onChange={handleInputChange}
               required
@@ -103,7 +103,7 @@ export function PartnerModal({ isOpen, onSubmit, setModalIsOpen }) {
             <input
               type="text"
               name="lastName"
-              placeholder="Ваша фамилия"
+              placeholder="Фамилия"
               value={formData.lastName}
               onChange={handleInputChange}
               required
@@ -111,14 +111,14 @@ export function PartnerModal({ isOpen, onSubmit, setModalIsOpen }) {
             <input
               type="text"
               name="activity"
-              placeholder="Ваш вид деятельности"
+              placeholder="Вид деятельности"
               value={formData.activity}
               onChange={handleInputChange}
               required
             />
             <textarea
               name="achievements"
-              placeholder="Ваши достижения"
+              placeholder="Достижения"
               value={formData.achievements}
               onChange={handleInputChange}
             />
@@ -147,7 +147,7 @@ export function PartnerModal({ isOpen, onSubmit, setModalIsOpen }) {
                 <input
                   type="number"
                   name="followers"
-                  placeholder="Ваши подписчики"
+                  placeholder="Количество подписчиков"
                   value={network.followers}
                   onChange={(e) => handleNetworkChange(index, e)}
                   required
@@ -165,7 +165,7 @@ export function PartnerModal({ isOpen, onSubmit, setModalIsOpen }) {
             <input
               type="text"
               name="contactInfo"
-              placeholder="Ваши контакты"
+              placeholder="Телефон"
               value={formData.contactInfo}
               onChange={handleInputChange}
               required
@@ -173,7 +173,7 @@ export function PartnerModal({ isOpen, onSubmit, setModalIsOpen }) {
             <input
               type="email"
               name="email"
-              placeholder="Ваша электронная почта"
+              placeholder="Email"
               value={formData.email}
               onChange={handleInputChange}
               required

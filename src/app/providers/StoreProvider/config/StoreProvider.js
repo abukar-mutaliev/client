@@ -6,6 +6,7 @@ import { adminReducer } from "../adminSlice";
 import { regionReducer } from "../regionSlice";
 import { emailReducer } from "../emailSlice";
 import { partnerEmailReducer } from "../partnerSlice";
+import pinnedCardsSlice from "../pinnedCardsSlice";
 
 export default configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
     regions: regionReducer,
     email: emailReducer,
     partnerEmail: partnerEmailReducer,
+    pinnedCardsSlice,
   },
 });

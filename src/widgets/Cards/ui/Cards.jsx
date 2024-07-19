@@ -40,7 +40,6 @@ export function Cards() {
     );
   }
 
-  // Сортируем категории по алфавитному порядку
   const sortedCategories = categories
     .slice()
     .sort((a, b) => a.category_name.localeCompare(b.category_name));
@@ -48,7 +47,6 @@ export function Cards() {
   return (
     <div className="cards-container">
       {sortedCategories.map((category) => {
-        // Сортируем карточки в каждой категории по имени
         const personsInCategory = persons
           .filter(
             (person) => person.categoryCategoryId === category.category_id
@@ -82,7 +80,7 @@ export function Cards() {
                     type="button"
                     onClick={() => handleShowMore(category.category_id)}
                   >
-                    Показать еще...
+                    Показать всех...
                   </button>
                 </Link>
               )}

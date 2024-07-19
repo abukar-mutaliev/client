@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
-
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getCategories } from "../../../../app/providers/StoreProvider/categoriesSlice";
 import "./categories.scss";
+import PropTypes from "prop-types";
+import { getCategories } from "../../../../app/providers/StoreProvider/categoriesSlice";
 
-export function Categories() {
+export function Categories({ selectedCategory, onCategoryChange }) {
   const [categoryWidth, setCategoryWidth] = useState("175px");
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories?.categories);
   const loading = useSelector((state) => state.categories.status === "loading");
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getCategories());
@@ -22,9 +19,7 @@ export function Categories() {
     const selectedCategoryId = event.target.value;
     const selectedOption = event.target.selectedOptions[0];
     setCategoryWidth(`${selectedOption.text.length * 10 + 100}px`);
-    if (selectedCategoryId) {
-      navigate(`/categories/${selectedCategoryId}`);
-    }
+    onCategoryChange(event);
   };
 
   if (loading) {
@@ -44,7 +39,7 @@ export function Categories() {
       <select
         style={{ width: categoryWidth }}
         onChange={handleChange}
-        defaultValue=""
+        value={selectedCategory}
       >
         <option className="dropdown_option" value="" disabled>
           Категории
@@ -58,3 +53,7 @@ export function Categories() {
     </div>
   );
 }
+Categories.propTypes = {
+  selectedCategory: PropTypes.string,
+  onCategoryChange: PropTypes.func.isRequired,
+};

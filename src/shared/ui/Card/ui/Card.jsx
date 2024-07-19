@@ -15,6 +15,7 @@ export function Card({ item }) {
       <span>{item.person_name}</span>
       <div className="clamp">
         <p>{item.activity}</p>
+        <p>{item.achievements}</p>
       </div>
 
       <div className="card-description">
@@ -41,5 +42,6 @@ Card.propTypes = {
     person_photo: PropTypes.string,
     person_description: PropTypes.string,
     activity: PropTypes.string,
+    achievements: PropTypes.string,
   }).isRequired,
 };

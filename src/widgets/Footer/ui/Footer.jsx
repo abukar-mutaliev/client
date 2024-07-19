@@ -12,6 +12,10 @@ export function Footer(props) {
     getCategories();
   }, [dispatch]);
 
+  const sortedCategories = categories
+    .slice()
+    .sort((a, b) => a.category_name.localeCompare(b.category_name));
+
   return (
     <div className="footer-body">
       <div className="footer">
@@ -19,14 +23,14 @@ export function Footer(props) {
           <img style={{ width: "200px" }} src={logo} alt="logo" />
         </p>
         <div className="footer_categories">
-          {categories.map((item) => (
+          {sortedCategories.map((item) => (
             <Link to={`/categories/${item.category_id}`} key={item.category_id}>
               <div className="footer_categories">{item.category_name}</div>
             </Link>
           ))}
-          <div className="footer_partner">
-            <Link to="/partner">Стань партнером</Link>
-          </div>
+        </div>
+        <div className="footer_partner">
+          <Link to="/partner">Стань партнером</Link>
         </div>
       </div>
       <p className="footer_p">&copy; 2024 MEDIA HUB. Все права защищены.</p>

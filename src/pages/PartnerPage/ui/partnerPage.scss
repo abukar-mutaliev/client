@@ -39,6 +39,22 @@
 .btn_submit:hover {
   transform: scale(1.05) translateY(-2px);
 }
+
+.custom-toast {
+  font-size: 20px;
+  text-align: center;
+  background-color: #28a745;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.Toastify__toast-container {
+  width: auto;
+  max-width: 600px;
+}
+
+
 @media (max-width: 768px) {
   .btn_submit:hover {
     transform: scale(1) translateY(0px);

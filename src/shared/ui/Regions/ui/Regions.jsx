@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types"; // Import PropTypes
 import { BarLoader } from "react-spinners";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchRegions } from "../../../../app/providers/StoreProvider/regionSlice";
 import "./regions.scss";
 
-export function Regions() {
+export function Regions({ selectedRegion, onRegionChange }) {
   const dispatch = useDispatch();
   const regions = useSelector((state) => state.regions?.regions);
   const navigate = useNavigate();
@@ -21,9 +21,7 @@ export function Regions() {
     const selectedRegionId = event.target.value;
     const selectedOption = event.target.selectedOptions[0];
     setRegionWidth(`${selectedOption.text.length * 10 + 150}px`);
-    if (selectedRegionId) {
-      navigate(`/region/${selectedRegionId}`);
-    }
+    onRegionChange(event);
   };
 
   if (loading) {
@@ -39,7 +37,7 @@ export function Regions() {
       <select
         style={{ width: regionWidth }}
         onChange={handleChange}
-        defaultValue=""
+        value={selectedRegion}
       >
         <option className="dropdown_option" value="" disabled>
           Регионы
@@ -53,3 +51,8 @@ export function Regions() {
     </div>
   );
 }
+
+Regions.propTypes = {
+  selectedRegion: PropTypes.string,
+  onRegionChange: PropTypes.func.isRequired,
+};

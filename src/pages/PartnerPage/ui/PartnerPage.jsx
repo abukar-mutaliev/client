@@ -2,6 +2,7 @@ import "./partnerPage.scss";
 import { useState } from "react";
 import { BarLoader } from "react-spinners";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { PartnerModal } from "../../../widgets/PartnerModal";
 import { sendPartnerEmail } from "../../../app/providers/StoreProvider/partnerSlice";
@@ -19,9 +20,18 @@ export function PartnerPage() {
   const handleSubmit = (formData) => {
     dispatch(sendPartnerEmail(formData)).then((result) => {
       if (result.meta.requestStatus === "fulfilled") {
-        toast.success("Заявка успешно сформирована!");
+        toast.success(
+          "Спасибо за заявку, в ближайшее время с вами свяжется наш менеджер",
+          {
+            position: "top-center",
+            className: "custom-toast",
+          }
+        );
       } else {
-        toast.error(`Ошибка при отправке письма: ${emailError}`);
+        toast.error(`Ошибка при отправке письма: ${emailError}`, {
+          position: "top-center",
+          className: "custom-toast",
+        });
       }
     });
   };

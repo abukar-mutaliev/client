@@ -32,7 +32,6 @@
 
 .clamp p {
   width: 305px;
-  height: 59px;
   font-family: Montserrat, sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -67,8 +66,7 @@
 @media (max-width: 768px) {
   .card {
     width: 365px;;
-    height: 452px;
-    margin-left: 0px;
+    margin-left: 0;
   }
   .card-button:active {
     background: #282727

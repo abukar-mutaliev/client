@@ -1,6 +1,7 @@
 .footer {
   display: flex;
   width: 100vw;
+  height: 300px;
   background: #1A1A1A;
   margin-top: 5%;
   align-items: center;
@@ -20,11 +21,9 @@
   color: #393939;
   font-family: Organetto, sans-serif;
   margin-left: 15%;
-  line-height: 300px;
   font-size: 70px;
 }
 .footer_categories {
-
   font-family: "Organetto Regular",  sans-serif;
   font-size: 16px;
   font-weight: 300;
@@ -33,12 +32,10 @@
   color: #FFFFFF;
   margin-left: 15%;
   margin-top: 8px;
-
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
 }
 .footer_partner {
   height: 87px;
@@ -85,8 +82,8 @@
   .footer_categories {
     width: 100%;
     display: flex;
-    flex-direction: column-reverse;
     flex-wrap: wrap;
     align-content: center;
+    margin-top: 8%;
   }
 }

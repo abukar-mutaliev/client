@@ -19,6 +19,8 @@ import { Partner } from "../../../shared/ui/Partner";
 export function Navbar() {
   const [isSearchVisible, setSearchVisible] = useState(false);
   const [isMenuVisible, setMenuVisible] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("");
   const categories = useSelector((state) => state.categories.categories);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,6 +38,7 @@ export function Navbar() {
 
   const handleChangeRegion = (event) => {
     const selectedRegionId = event.target.value;
+    setSelectedRegion(selectedRegionId);
     setMenuVisible(!isMenuVisible);
     if (selectedRegionId) {
       navigate(`/region/${selectedRegionId}`);
@@ -44,11 +47,19 @@ export function Navbar() {
 
   const handleChange = (event) => {
     const selectedCategoryId = event.target.value;
+    setSelectedCategory(selectedCategoryId);
     setMenuVisible(!isMenuVisible);
     if (selectedCategoryId) {
       navigate(`/categories/${selectedCategoryId}`);
     }
   };
+
+  const handleLogoClick = () => {
+    setSelectedCategory("");
+    setSelectedRegion("");
+    navigate("/");
+  };
+
   const sortedCategories = categories
     ?.slice()
     .sort((a, b) => a.category_name.localeCompare(b.category_name));
@@ -56,10 +67,16 @@ export function Navbar() {
   return (
     <div className="navbar">
       <div className="container">
-        <Logo />
+        <Logo onClick={handleLogoClick} />
         <div className="dropdown_menu">
-          <Categories />
-          <Regions />
+          <Categories
+            selectedCategory={selectedCategory}
+            onCategoryChange={handleChange}
+          />
+          <Regions
+            selectedRegion={selectedRegion}
+            onRegionChange={handleChangeRegion}
+          />
         </div>
         <Partner />
         <Search />
@@ -126,7 +143,7 @@ export function Navbar() {
               <select
                 onChange={handleChange}
                 style={{ width: "225px" }}
-                defaultValue=""
+                value={selectedCategory}
               >
                 <option className="mobile-dropdown_option" value="" disabled>
                   Категории
@@ -145,7 +162,7 @@ export function Navbar() {
               <select
                 onChange={handleChangeRegion}
                 style={{ width: "194px" }}
-                defaultValue=""
+                value={selectedRegion}
               >
                 <option className="mobile-dropdown_option" value="" disabled>
                   Регионы
