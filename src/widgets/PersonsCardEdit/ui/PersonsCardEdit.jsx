@@ -24,6 +24,7 @@ export function PersonsCardEdit() {
   const [isLoading, setIsLoading] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [personToDelete, setPersonToDelete] = useState(null);
+  const admin = useSelector((state) => state.admin);
 
   useEffect(() => {
     dispatch(getPersons());
@@ -92,7 +93,7 @@ export function PersonsCardEdit() {
     <div className="admin_cards">
       {sortedPersons.map((item) => (
         <div key={item?.person_id} className="card-container">
-          <Card item={item} />
+          <Card item={item} admin={admin} />
           <div className="card_edit_btn">
             <button
               type="button"
