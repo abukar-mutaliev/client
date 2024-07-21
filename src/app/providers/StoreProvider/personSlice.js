@@ -101,6 +101,18 @@ export const updatePerson = createAsyncThunk(
   }
 );
 
+export const pinPerson = createAsyncThunk(
+  "persons/pinPerson",
+  async (personId, { rejectWithValue }) => {
+    try {
+      await axiosInstance.post(`/person/${personId}/pin`);
+      return personId;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const personsSlice = createSlice({
   name: "persons",
   initialState: {
@@ -177,6 +189,14 @@ export const personsSlice = createSlice({
       .addCase(updatePerson.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(pinPerson.fulfilled, (state, action) => {
+        const person = state.persons.find(
+          (p) => p.person_id === action.payload
+        );
+        if (person) {
+          person.pinned = !person.pinned;
+        }
       });
   },
 });

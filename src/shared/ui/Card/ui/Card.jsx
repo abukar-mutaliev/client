@@ -2,11 +2,25 @@ import React from "react";
 import "./card.scss";
 import { Link } from "react-router-dom";
 import * as PropTypes from "prop-types";
+import { TbPinnedFilled } from "react-icons/tb";
+import { VscPinned } from "react-icons/vsc";
 import btnIcon from "../../../assets/icons/button.svg";
 
-export function Card({ item }) {
+export function Card({ item, admin, onPinClick }) {
+  const handlePinClick = () => {
+    onPinClick(item.person_id);
+  };
   return (
     <div className="card">
+      {admin.isAuthenticated && (
+        <button type="button" className="btn-pinned" onClick={handlePinClick}>
+          {item.pinned ? (
+            <TbPinnedFilled style={{ width: "30px", height: "30px" }} />
+          ) : (
+            <VscPinned style={{ width: "30px", height: "30px" }} />
+          )}
+        </button>
+      )}
       <img
         className="card-image"
         src={`/${item.person_photo}`}
@@ -17,7 +31,6 @@ export function Card({ item }) {
         <p>{item.activity}</p>
         <p>{item.achievements}</p>
       </div>
-
       <div className="card-description">
         <Link
           to={{
@@ -43,5 +56,8 @@ Card.propTypes = {
     person_description: PropTypes.string,
     activity: PropTypes.string,
     achievements: PropTypes.string,
+    pinned: PropTypes.bool,
   }).isRequired,
+  admin: PropTypes.bool,
+  onPinClick: PropTypes.func,
 };

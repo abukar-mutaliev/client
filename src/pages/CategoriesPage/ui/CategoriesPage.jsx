@@ -3,7 +3,10 @@ import "./categoriesPage.scss";
 import { BarLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getPersons } from "../../../app/providers/StoreProvider/personSlice";
+import {
+  getPersons,
+  pinPerson,
+} from "../../../app/providers/StoreProvider/personSlice";
 import { Card } from "../../../shared/ui/Card";
 import { getCategories } from "../../../app/providers/StoreProvider/categoriesSlice";
 
@@ -12,7 +15,7 @@ export function CategoriesPage() {
   const { id } = useParams();
   const persons = useSelector((state) => state.persons.persons);
   const categories = useSelector((state) => state.categories.categories);
-  const loading = useSelector((state) => state.categories.status === "loading");
+  const admin = useSelector((state) => state.admin);
 
   useEffect(() => {
     dispatch(getPersons());
@@ -24,7 +27,11 @@ export function CategoriesPage() {
 
   const filteredPersons = persons
     .filter((person) => person.categoryCategoryId === Number(id))
-    .sort((a, b) => a.person_name.localeCompare(b.person_name));
+    .sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return a.person_name.localeCompare(b.person_name);
+    });
 
   const categoryName = categories
     .slice()
@@ -39,14 +46,23 @@ export function CategoriesPage() {
     );
   }
 
+  const handlePinClick = (personId) => {
+    dispatch(pinPerson(personId));
+  };
+
   return (
     <div className="categories_page">
       <div>
         <p className="category_name">{categoryName}</p>
         <div className="categories_container">
-          {filteredPersons.map((item) => {
-            return <Card key={item.person_id} item={item} />;
-          })}
+          {filteredPersons.map((item) => (
+            <Card
+              key={item.person_id}
+              item={item}
+              admin={admin}
+              onPinClick={handlePinClick}
+            />
+          ))}
         </div>
       </div>
     </div>

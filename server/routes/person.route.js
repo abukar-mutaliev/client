@@ -1,11 +1,13 @@
 const { Router } = require("express");
-const userController = require("../controllers/person.controller");
 const fileUpload = require("express-fileupload");
+const userController = require("../controllers/person.controller");
 const authenticateToken = require("../middlewares/auth.middleware");
 
 const router = Router();
 
 router.post("/", authenticateToken, fileUpload(), userController.createPerson);
+
+router.post("/:id/pin", authenticateToken, userController.pinnedPerson);
 
 router.get("/:id/networks", userController.getPersonNetworks);
 

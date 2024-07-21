@@ -2,6 +2,16 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
+const isTokenExpired = (token) => {
+  try {
+    const decodedToken = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+    return decodedToken.exp < currentTime;
+  } catch (error) {
+    return true;
+  }
+};
+
 export const registerAdmin = createAsyncThunk(
   "admin/registerAdmin",
   async (adminData, { rejectWithValue }) => {
@@ -77,7 +87,7 @@ export const checkAdminStatus = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("token");
-      if (!token) {
+      if (!token || isTokenExpired(token)) {
         throw new Error("Не авторизован");
       }
       const decodedToken = jwtDecode(token);
@@ -88,21 +98,24 @@ export const checkAdminStatus = createAsyncThunk(
       });
       return { admin: decodedToken, isAdmin: response.data.isAdmin };
     } catch (error) {
+      localStorage.removeItem("token");
       return rejectWithValue(error.response.data);
     }
   }
 );
 
+const initialState = {
+  admins: [],
+  admin: null,
+  token: localStorage.getItem("token") || null,
+  status: "idle",
+  error: null,
+  isAuthenticated: false,
+};
+
 const adminSlice = createSlice({
   name: "admin",
-  initialState: {
-    admins: [],
-    admin: null,
-    token: localStorage.getItem("token") || null,
-    status: "idle",
-    error: null,
-    isAuthenticated: false,
-  },
+  initialState,
   reducers: {
     logoutAdmin: (state) => {
       localStorage.removeItem("token");
@@ -135,7 +148,6 @@ const adminSlice = createSlice({
         state.admin = action.payload.admin;
         state.token = action.payload.token;
         state.isAuthenticated = true;
-        state.isAdmin = true;
       })
       .addCase(loginAdmin.rejected, (state, action) => {
         state.status = "failed";
@@ -153,6 +165,7 @@ const adminSlice = createSlice({
       .addCase(checkAdminStatus.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+        state.isAuthenticated = false;
       })
       .addCase(fetchAdmins.fulfilled, (state, action) => {
         state.status = "succeeded";

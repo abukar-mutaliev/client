@@ -16,6 +16,7 @@ class PersonController {
       categoryCategoryId,
       networks,
       ad_prices,
+      pinned,
     } = req.body;
 
     let uploadPath;
@@ -35,6 +36,7 @@ class PersonController {
         achievements,
         regionRegionId,
         categoryCategoryId,
+        pinned,
         person_photo: uploadPath,
       });
 
@@ -88,6 +90,22 @@ class PersonController {
     } catch (error) {
       console.error("Ошибка при создании пользователя с сетями:", error);
       return next(ApiError.internal("Внутренняя ошибка сервера"));
+    }
+  }
+
+  async pinnedPerson(req, res) {
+    const { id } = req.params;
+    try {
+      const person = await Person.findByPk(id);
+      if (person) {
+        person.pinned = !person.pinned;
+        await person.save();
+        res.status(200).send({ message: "Person pin status updated." });
+      } else {
+        res.status(404).send({ message: "Person not found." });
+      }
+    } catch (error) {
+      res.status(500).send({ message: "An error occurred.", error });
     }
   }
 
@@ -179,6 +197,7 @@ class PersonController {
       categoryCategoryId,
       networks,
       ad_prices,
+      pinned,
     } = req.body;
     let uploadPath;
     try {
@@ -192,8 +211,8 @@ class PersonController {
       if (!existingPerson) {
         return res.status(404).json({ error: "Пользователь не найден" });
       }
-
       existingPerson.person_name = person_name;
+      existingPerson.pinned = pinned;
       existingPerson.person_description = person_description;
       existingPerson.activity = activity;
       existingPerson.achievements = achievements;

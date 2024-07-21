@@ -4,7 +4,6 @@
   height: 472px;
   border-radius: 10px;
   background: #F0F0F0;
-  margin-top: 40px;
   position:relative;
   margin-left: 20px;
   text-align: center;
@@ -63,10 +62,22 @@
   margin-left: 7%;
 }
 
+.btn-pinned {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1;
+}
+
 @media (max-width: 768px) {
   .card {
     width: 365px;;
     margin-left: 0;
+    margin-bottom: 40px;
   }
   .card-button:active {
     background: #282727
@@ -95,7 +106,6 @@
   .card {
     width: 95%;
     margin-left: 0px;
+
   }
 }
-
-

@@ -24,6 +24,7 @@ export function AdminPanelPage() {
   const [activeComponent, setActiveComponent] = useState(null);
   const admin = useSelector((state) => state.admin.admin);
   const loading = useSelector((state) => state.admin.status === "loading");
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
 
   const personFormRef = useRef(null);
   const adminFormRef = useRef(null);
@@ -35,16 +36,22 @@ export function AdminPanelPage() {
   const networksRef = useRef(null);
 
   useEffect(() => {
-    dispatch(checkAdminStatus());
+    const checkStatus = async () => {
+      await dispatch(checkAdminStatus());
+      setIsAuthChecked(true);
+    };
+    checkStatus();
   }, [dispatch]);
 
   useEffect(() => {
-    if (admin && admin.isAdmin) {
-      dispatch(fetchAdmins());
-    } else if (!loading && !admin) {
-      navigate("/login");
+    if (isAuthChecked) {
+      if (admin && admin.isAdmin) {
+        dispatch(fetchAdmins());
+      } else if (!loading && !admin) {
+        navigate("/login");
+      }
     }
-  }, [dispatch, admin, loading, navigate]);
+  }, [dispatch, admin, loading, navigate, isAuthChecked]);
 
   const handleLogout = useCallback(() => {
     dispatch(logoutAdmin());
@@ -64,7 +71,7 @@ export function AdminPanelPage() {
     setTimeout(() => scrollToRef(ref), 0);
   };
 
-  if (loading) {
+  if (loading || !isAuthChecked) {
     return (
       <div className="loader">
         <BarLoader />
@@ -72,114 +79,114 @@ export function AdminPanelPage() {
     );
   }
 
-  if (!admin) {
-    return navigate("/login");
-  }
-
-  return (
-    <div className="admin_page">
-      <div className="admin_navbar">
-        <h2>Панель администратора</h2>
-        <button className="logout_btn" type="button" onClick={handleLogout}>
-          ВЫЙТИ
-        </button>
-      </div>
-      <div className="btn_container">
-        <button
-          className="admin_btn"
-          type="button"
-          onClick={() => handleButtonClick("personForm", personFormRef)}
-        >
-          Добавить партнера
-        </button>
-        <button
-          className="admin_btn"
-          type="button"
-          onClick={() => handleButtonClick("personsList", personsRef)}
-        >
-          Показать список партнеров
-        </button>
-        {admin.isAdmin && (
+  if (admin) {
+    return (
+      <div className="admin_page">
+        <div className="admin_navbar">
+          <h2>Панель администратора</h2>
+          <button className="logout_btn" type="button" onClick={handleLogout}>
+            ВЫЙТИ
+          </button>
+        </div>
+        <div className="btn_container">
           <button
             className="admin_btn"
             type="button"
-            onClick={() => handleButtonClick("adminForm", adminFormRef)}
+            onClick={() => handleButtonClick("personForm", personFormRef)}
           >
-            Добавить Админа
+            Добавить партнера
           </button>
+          <button
+            className="admin_btn"
+            type="button"
+            onClick={() => handleButtonClick("personsList", personsRef)}
+          >
+            Показать список партнеров
+          </button>
+          {admin.isAdmin && (
+            <button
+              className="admin_btn"
+              type="button"
+              onClick={() => handleButtonClick("adminForm", adminFormRef)}
+            >
+              Добавить Админа
+            </button>
+          )}
+          <button
+            className="admin_btn"
+            type="button"
+            onClick={() => handleButtonClick("adminsList", adminsListRef)}
+          >
+            Показать список Администраторов
+          </button>
+        </div>
+        <div className="btn_container">
+          <button
+            className="admin_btn"
+            type="button"
+            onClick={() => handleButtonClick("categoriesList", categoriesRef)}
+          >
+            Показать список категорий
+          </button>
+          <button
+            className="admin_btn"
+            type="button"
+            onClick={() => handleButtonClick("regionsList", regionsRef)}
+          >
+            Показать список регионов
+          </button>
+          <button
+            className="admin_btn"
+            type="button"
+            onClick={() => handleButtonClick("networksList", networksRef)}
+          >
+            Показать список соцсетей
+          </button>
+        </div>
+        {activeComponent === "personForm" && (
+          <div ref={personFormRef}>
+            <AddPersonForm />
+          </div>
         )}
-        <button
-          className="admin_btn"
-          type="button"
-          onClick={() => handleButtonClick("adminsList", adminsListRef)}
-        >
-          Показать список Администраторов
-        </button>
+        {activeComponent === "adminForm" && (
+          <div ref={adminFormRef}>
+            <AddAdminForm />
+          </div>
+        )}
+        {activeComponent === "personsList" && (
+          <div ref={personsRef}>
+            <PersonsCardEdit />
+          </div>
+        )}
+        {activeComponent === "adminsList" && (
+          <div ref={adminsListRef}>
+            <AdminsList />
+          </div>
+        )}
+        {activeComponent === "categoriesList" && (
+          <div ref={categoriesRef}>
+            <CategoriesList />
+          </div>
+        )}
+        {activeComponent === "regionsList" && (
+          <div ref={regionsRef}>
+            <RegionsList />
+          </div>
+        )}
+        {activeComponent === "networkForm" && (
+          <div ref={networkFormRef}>
+            <AddNetworkForm />
+          </div>
+        )}
+        {activeComponent === "networksList" && (
+          <div ref={networksRef}>
+            <NetworksCardEdit />
+          </div>
+        )}
+        <ToastContainer />
       </div>
-      <div className="btn_container">
-        <button
-          className="admin_btn"
-          type="button"
-          onClick={() => handleButtonClick("categoriesList", categoriesRef)}
-        >
-          Показать список категорий
-        </button>
-        <button
-          className="admin_btn"
-          type="button"
-          onClick={() => handleButtonClick("regionsList", regionsRef)}
-        >
-          Показать список регионов
-        </button>
-        <button
-          className="admin_btn"
-          type="button"
-          onClick={() => handleButtonClick("networksList", networksRef)}
-        >
-          Показать список соцсетей
-        </button>
-      </div>
-      {activeComponent === "personForm" && (
-        <div ref={personFormRef}>
-          <AddPersonForm />
-        </div>
-      )}
-      {activeComponent === "adminForm" && (
-        <div ref={adminFormRef}>
-          <AddAdminForm />
-        </div>
-      )}
-      {activeComponent === "personsList" && (
-        <div ref={personsRef}>
-          <PersonsCardEdit />
-        </div>
-      )}
-      {activeComponent === "adminsList" && (
-        <div ref={adminsListRef}>
-          <AdminsList />
-        </div>
-      )}
-      {activeComponent === "categoriesList" && (
-        <div ref={categoriesRef}>
-          <CategoriesList />
-        </div>
-      )}
-      {activeComponent === "regionsList" && (
-        <div ref={regionsRef}>
-          <RegionsList />
-        </div>
-      )}
-      {activeComponent === "networkForm" && (
-        <div ref={networkFormRef}>
-          <AddNetworkForm />
-        </div>
-      )}
-      {activeComponent === "networksList" && (
-        <div ref={networksRef}>
-          <NetworksCardEdit />
-        </div>
-      )}
-      <ToastContainer />
-    </div>
-  );
+    );
+  }
+
+  return navigate("/login");
 }

@@ -4,13 +4,17 @@ import "./cards.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Card } from "../../../shared/ui/Card";
-import { getPersons } from "../../../app/providers/StoreProvider/personSlice";
+import {
+  getPersons,
+  pinPerson,
+} from "../../../app/providers/StoreProvider/personSlice";
 import { getCategories } from "../../../app/providers/StoreProvider/categoriesSlice";
 
 export function Cards() {
   const dispatch = useDispatch();
   const persons = useSelector((state) => state.persons.persons);
   const categories = useSelector((state) => state.categories.categories);
+  const admin = useSelector((state) => state.admin);
   const [visibleCards, setVisibleCards] = useState({});
 
   useEffect(() => {
@@ -32,6 +36,10 @@ export function Cards() {
     return visibleCards[categoryId] || 4;
   };
 
+  const handlePinClick = (personId) => {
+    dispatch(pinPerson(personId));
+  };
+
   if (categories.loading) {
     return (
       <div className="loader">
@@ -40,7 +48,6 @@ export function Cards() {
     );
   }
 
-
   return (
     <div className="cards-container">
       {categories.map((category) => {
@@ -48,7 +55,11 @@ export function Cards() {
           .filter(
             (person) => person.categoryCategoryId === category.category_id
           )
-          .sort((a, b) => a.person_name.localeCompare(b.person_name));
+          .sort((a, b) => {
+            if (a.pinned && !b.pinned) return -1;
+            if (!a.pinned && b.pinned) return 1;
+            return a.person_name.localeCompare(b.person_name);
+          });
 
         if (personsInCategory.length === 0) return null;
         return (
@@ -58,7 +69,12 @@ export function Cards() {
               {personsInCategory
                 .slice(0, getVisibleCount(category.category_id))
                 .map((person) => (
-                  <Card key={person.person_id} item={person} />
+                  <Card
+                    key={person.person_id}
+                    onPinClick={handlePinClick}
+                    item={person}
+                    admin={admin}
+                  />
                 ))}
             </div>
             <div className="show-more_btn">

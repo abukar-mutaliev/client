@@ -3,7 +3,10 @@ import "./regionsPage.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
-import { getPersons } from "../../../app/providers/StoreProvider/personSlice";
+import {
+  getPersons,
+  pinPerson,
+} from "../../../app/providers/StoreProvider/personSlice";
 import { Card } from "../../../shared/ui/Card";
 import { fetchRegions } from "../../../app/providers/StoreProvider/regionSlice";
 
@@ -12,6 +15,7 @@ export function RegionsPage() {
   const { id } = useParams();
   const persons = useSelector((state) => state.persons.persons);
   const regions = useSelector((state) => state.regions.regions);
+  const admin = useSelector((state) => state.admin);
 
   useEffect(() => {
     dispatch(getPersons());
@@ -23,7 +27,11 @@ export function RegionsPage() {
 
   const filteredPersons = persons
     .filter((person) => person.regionRegionId === Number(id))
-    .sort((a, b) => a.person_name.localeCompare(b.person_name));
+    .sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return a.person_name.localeCompare(b.person_name);
+    });
 
   const regionName = regions
     .slice()
@@ -38,13 +46,22 @@ export function RegionsPage() {
     );
   }
 
+  const handlePinClick = (personId) => {
+    dispatch(pinPerson(personId));
+  };
+
   return (
     <div className="regions_page">
       <p className="region_name">{regionName}</p>
       <div className="regions_container">
-        {filteredPersons.map((item) => {
-          return <Card key={item.person_id} item={item} />;
-        })}
+        {filteredPersons.map((item) => (
+          <Card
+            key={item.person_id}
+            item={item}
+            admin={admin}
+            onPinClick={handlePinClick}
+          />
+        ))}
       </div>
     </div>
   );

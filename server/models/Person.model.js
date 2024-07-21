@@ -20,6 +20,7 @@ Person.init(
     regionRegionId: DataTypes.INTEGER,
     categoryCategoryId: DataTypes.INTEGER,
     person_photo: DataTypes.STRING,
+    pinned: { type: DataTypes.BOOLEAN, defaultValue: false },
   },
   {
     sequelize,
