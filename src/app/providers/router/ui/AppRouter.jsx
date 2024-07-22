@@ -8,7 +8,6 @@ import "./appRouter.scss";
 import { CategoriesPage } from "../../../../pages/CategoriesPage";
 import { LoginPage } from "../../../../pages/LoginPage";
 import { RegionsPage } from "../../../../pages/RegionsPage";
-import { PartnerPage } from "../../../../pages/PartnerPage";
 import ScrollToTop from "../../../../shared/ui/ScrollToTop";
 
 export function AppRouter() {
@@ -21,7 +20,6 @@ export function AppRouter() {
         <Route path="/admin" element={<AdminPanelPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/person/:id" element={<DescriptionPage />} />
-        <Route path="/partner/" element={<PartnerPage />} />
         <Route path="/" element={<MainPage />} />
         <Route path="/categories/:id" element={<CategoriesPage />} />
         <Route path="/region/:id" element={<RegionsPage />} />

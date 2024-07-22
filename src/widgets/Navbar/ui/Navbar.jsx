@@ -14,7 +14,6 @@ import mobileSearch from "../../../shared/assets/icons/mobile-search.svg";
 import { getCategories } from "../../../app/providers/StoreProvider/categoriesSlice";
 import { fetchRegions } from "../../../app/providers/StoreProvider/regionSlice";
 import { MobileSearch } from "../../MobileSearch";
-import { Partner } from "../../../shared/ui/Partner";
 
 export function Navbar() {
   const [isSearchVisible, setSearchVisible] = useState(false);
@@ -78,7 +77,11 @@ export function Navbar() {
             onRegionChange={handleChangeRegion}
           />
         </div>
-        <Partner />
+        <div className="btn-about">
+          <Link to="/about" type="button">
+            О нас
+          </Link>
+        </div>
         <Search />
         <div className="icons">
           <button
@@ -175,12 +178,12 @@ export function Navbar() {
               </select>
             </div>
             <Link
-              to="/partner"
+              to="/about"
               type="button"
               onClick={() => setMenuVisible(false)}
               className="mobile-about"
             >
-              Стать партнером
+              О нас
             </Link>
           </div>
         </div>

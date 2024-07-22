@@ -61,7 +61,11 @@ export function CustomSlider(props) {
         {slidesData.map((slide) => (
           <div className="slider-container" key={slide.id}>
             {slide.type === "image" && (
-              <img src={slide.url} alt={`Slide ${slide.id}`} />
+              <img
+                src={slide.url}
+                className="react-player_img"
+                alt={`Slide ${slide.id}`}
+              />
             )}
             {slide.type === "video" && (
               <ReactPlayer

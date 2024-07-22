@@ -1,0 +1,59 @@
+.filter {
+  background: #F0F0F0;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  unicode-bidi: isolate;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+  div {
+    margin-top: 10px;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  select, input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(204, 204, 204, 0.2);
+    color: black;
+  }
+
+  select:focus, input[type="number"]:focus {
+    outline: none;
+    border: 1px solid #555;
+  }
+}
+
+.filter select option {
+  color: black;
+}
+
+
+.filter_btn {
+  width: 300px;
+  height: 50px;
+  display: flow;
+  margin: auto;
+}
+
+.filter_btn:hover {
+  box-shadow: none;
+}
+.filtered-cards {
+  display: grid;
+  justify-content: center;
+  width: 80vw;
+  unicode-bidi: isolate;
+  gap: 50px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 3%;
+}

@@ -354,7 +354,7 @@ AdModal.propTypes = {
       PersonNetwork: PropTypes.shape({
         network_name: PropTypes.string.isRequired,
         followers: PropTypes.number.isRequired,
-      }).isRequired,
+      }),
     })
   ).isRequired,
 };

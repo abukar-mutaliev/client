@@ -30,7 +30,7 @@ export function Footer(props) {
           ))}
         </div>
         <div className="footer_partner">
-          <Link to="/partner">Стань партнером</Link>
+          <Link to="/about">Стать партнером</Link>
         </div>
       </div>
       <p className="footer_p">&copy; 2024 MEDIA HUB. Все права защищены.</p>

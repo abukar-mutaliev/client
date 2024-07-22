@@ -138,11 +138,15 @@
   text-align: left;
   font-family: "Montserrat", sans-serif;
   padding-bottom: 5%;
+  margin-top: 40px;
 }
 
 .description-image-container {
   display: grid;
   height: 50%;
+}
+.mobile-order-loader {
+  display: none;
 }
 
 .modal-overlay {
@@ -465,6 +469,9 @@ textarea {
 }
 
 @media (max-width: 738px) {
+  .loader_description {
+    display: none;
+  }
   .description-person {
     margin-right: auto;
     margin-left: auto;
@@ -560,6 +567,10 @@ textarea {
     .description-text span {
       width: 100%;
       max-width: 100%;
+      text-align: center;
+    }
+    .loader_description:first-child {
+      display: none;
     }
   }
 

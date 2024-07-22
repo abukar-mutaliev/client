@@ -47,7 +47,7 @@ class SendEmailController {
 
     const mailOptions = {
       from: "abubakr.ingush@gmail.com",
-      to: "abukar.mutaliev.js@gmail.com",
+      to: "media-hub@gmail.ru",
       subject: "Заказ рекламы",
       html: emailContent,
     };

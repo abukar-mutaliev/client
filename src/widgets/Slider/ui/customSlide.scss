@@ -5,7 +5,7 @@
 .slider-container {
   width: 100%;
   img {
-    width: 80%;
+    width: 100%;
     height: auto;
     margin-left: auto;
     margin-right: auto;
@@ -18,7 +18,6 @@
     margin-right: auto;
   }
 }
-
 .slick-slider {
   width: 97%;
 }
@@ -26,7 +25,7 @@
 .slick-dots {
   width: 100%;
   text-align: center;
-  bottom: 10px; /* Adjust as needed */
+  bottom: 10px;
 }
 
 @media (max-width: 768px) {

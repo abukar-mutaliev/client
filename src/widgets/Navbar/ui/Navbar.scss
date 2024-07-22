@@ -15,7 +15,18 @@
   align-items: center;
 }
 
+.btn-about {
+  border: 1px solid #000000;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 5px 10px 5px 10px;
+}
 
+.btn-about a {
+  text-decoration: none;
+  color: black;
+  line-height: 21.65px;
+}
 
 @media (max-width: 1422px) {
   .dropdown_menu {
@@ -53,7 +64,7 @@
   .close-icon,
   .search-icon,
   .menu-icon,
-  .logo{
+  .logo {
     outline: none;
     -webkit-tap-highlight-color: transparent;
   }
@@ -79,7 +90,7 @@
     width: 100%;
   }
 
-  .menu-items, .contact-container, .dropdown_menu, .contact, .search-container {
+  .menu-items, .contact-container, .dropdown_menu, .btn-about, .search-container {
     display: none;
   }
 
@@ -255,5 +266,4 @@
     z-index: 1000;
     overflow-y: auto;
   }
-
 }

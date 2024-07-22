@@ -28,7 +28,6 @@ export function Card({ item, admin, onPinClick }) {
       />
       <span>{item.person_name}</span>
       <div className="clamp">
-        <p>{item.activity}</p>
         <p>{item.achievements}</p>
       </div>
       <div className="card-description">
@@ -54,10 +53,11 @@ Card.propTypes = {
     person_name: PropTypes.string,
     person_photo: PropTypes.string,
     person_description: PropTypes.string,
-    activity: PropTypes.string,
     achievements: PropTypes.string,
     pinned: PropTypes.bool,
   }).isRequired,
-  admin: PropTypes.bool,
+  admin: PropTypes.shape({
+    isAuthenticated: PropTypes.bool,
+  }),
   onPinClick: PropTypes.func,
 };
