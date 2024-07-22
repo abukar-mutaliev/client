@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { BarLoader } from "react-spinners";
 import "./cards.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
 import { Card } from "../../../shared/ui/Card";
 import {
   getPersons,
@@ -21,6 +22,7 @@ export function Cards() {
   const [filteredPersons, setFilteredPersons] = useState([]);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
+  const nodeRef = useRef(null);
 
   useEffect(() => {
     dispatch(getPersons());
@@ -92,6 +94,7 @@ export function Cards() {
     }
     setIsOpenFilter(!isOpenFilter);
   };
+
   if (categories.loading) {
     return (
       <div className="loader">
@@ -105,19 +108,23 @@ export function Cards() {
       <button type="button" className="filter_btn" onClick={handleOpenFilter}>
         {isOpenFilter ? "Закрыть фильтр" : "Фильтр"}
       </button>
-      {isOpenFilter && (
-        <div className="category-section">
+      <CSSTransition
+        in={isOpenFilter}
+        timeout={300}
+        classNames="filter"
+        unmountOnExit
+        nodeRef={nodeRef}
+      >
+        <div className="filter-container" ref={nodeRef}>
           <Filter onFilterChange={handleFilterChange} />
+          <div className="filtered-cards">
+            {filteredPersons?.map((person) => (
+              <Card key={person.person_id} admin={admin} item={person} />
+            ))}
+          </div>
         </div>
-      )}
+      </CSSTransition>
 
-      {isOpenFilter && (
-        <div className="filtered-cards">
-          {filteredPersons?.map((person) => (
-            <Card key={person.person_id} admin={admin} item={person} />
-          ))}
-        </div>
-      )}
       {!isOpenFilter &&
         !isFiltered &&
         categories.map((category) => {

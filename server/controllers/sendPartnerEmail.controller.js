@@ -41,7 +41,7 @@ class SendPartnerEmailController {
 
     const mailOptions = {
       from: "abubakr.ingush@gmail.com",
-      to: "abukar.mutaliev.js@gmail.com",
+      to: "media-hub@mail.ru",
       subject: "Заявка на Партнерство",
       html: emailContent,
     };

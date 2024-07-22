@@ -5,6 +5,7 @@ import { Card } from "../../../shared/ui/Card";
 import {
   deletePerson,
   getPersons,
+  pinPerson,
   updatePerson,
 } from "../../../app/providers/StoreProvider/personSlice";
 import deleteCard from "../../../shared/assets/icons/delete.svg";
@@ -79,7 +80,9 @@ export function PersonsCardEdit() {
     setCurrentPerson(person);
     setShowModal(true);
   };
-
+  const handlePinClick = (personId) => {
+    dispatch(pinPerson(personId));
+  };
   const handleBackgroundClick = (e) => {
     if (e.target.classList.contains("modal-overlay")) {
       cancelDelete();
@@ -93,7 +96,7 @@ export function PersonsCardEdit() {
     <div className="admin_cards">
       {sortedPersons.map((item) => (
         <div key={item?.person_id} className="card-container">
-          <Card item={item} admin={admin} />
+          <Card item={item} admin={admin} onPinClick={handlePinClick} />
           <div className="card_edit_btn">
             <button
               type="button"

@@ -1,3 +1,29 @@
+.filter-container {
+  overflow: hidden;
+}
+
+.filter-enter {
+  max-height: 0;
+  opacity: 0;
+}
+
+.filter-enter-active {
+  max-height: 500px;
+  opacity: 1;
+  transition: max-height 300ms ease, opacity 300ms ease;
+}
+
+.filter-exit {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.filter-exit-active {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 300ms ease, opacity 300ms ease;
+}
+
 .filter {
   background: #F0F0F0;
   color: black;
@@ -25,52 +51,86 @@
     border: none;
     background-color: rgba(204, 204, 204, 0.2);
     color: black;
+    cursor: pointer;
   }
 
   select:focus, input[type="number"]:focus {
     outline: none;
     border: 1px solid #555;
   }
-}
 
-.filter select option {
-  color: black;
+  select option {
+    color: black;
+    cursor: pointer;
+  }
 }
-
 
 .filter_btn {
   width: 300px;
   height: 50px;
   display: flow;
   margin: auto;
+  cursor: pointer;
 }
 
 .filter_btn:hover {
   box-shadow: none;
 }
+
 .filtered-cards {
   display: grid;
   justify-content: center;
-  width: 80vw;
+  width: 100%;
   unicode-bidi: isolate;
   gap: 50px;
   grid-template-columns: repeat(4, 1fr);
   margin-bottom: 3%;
 }
 
+@media (max-width: 1512px) {
+  .filtered-cards, .cards {
+    width: 100%;
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .filtered-cards, .cards  {
+    width: 100%;
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+
+  .filter {
+    width: 95%;
+    margin: auto;
+  }
+
+  .filter_btn {
+    margin-bottom: 40px;
+  }
+}
+
 @media (max-width: 712px) {
-  .filtered-cards {
+  .filtered-cards, .cards  {
     width: 100%;
     display: flex;
     flex-direction: column;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
   }
-    .filter {
-      width: 95%;
-      margin: auto;
-    }
-    .filter_btn {
-      margin-bottom: 40px;
-    }
+
+  .filter {
+    width: 95%;
+    margin: auto;
+  }
+
+  .filter_btn {
+    margin-bottom: 40px;
+  }
 }
