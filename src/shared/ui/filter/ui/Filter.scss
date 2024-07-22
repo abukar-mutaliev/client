@@ -57,3 +57,20 @@
   grid-template-columns: repeat(4, 1fr);
   margin-bottom: 3%;
 }
+
+@media (max-width: 712px) {
+  .filtered-cards {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+    .filter {
+      width: 95%;
+      margin: auto;
+    }
+    .filter_btn {
+      margin-bottom: 40px;
+    }
+}
