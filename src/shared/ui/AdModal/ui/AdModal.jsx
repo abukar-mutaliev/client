@@ -121,7 +121,7 @@ export function AdModal({
         <div className="modal" ref={modalRef}>
           <h2>Заказать рекламу</h2>
           <input
-            placeholder="Ваши ФИО"
+            placeholder="ФИО"
             value={comments}
             required
             onChange={(e) => {
@@ -132,7 +132,7 @@ export function AdModal({
           />
           <input
             type="email"
-            placeholder="Ваш E-mail почта"
+            placeholder="Email"
             value={email}
             required
             onChange={(e) => {
@@ -143,7 +143,7 @@ export function AdModal({
           />
           <input
             type="tel"
-            placeholder="Ваш номер телефона"
+            placeholder="Номер телефона"
             value={phone}
             required
             onChange={(e) => {
