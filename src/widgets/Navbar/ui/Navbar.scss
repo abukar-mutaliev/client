@@ -225,36 +225,37 @@
     background: red;
     z-index: 1001;
   }
+  /* Убираем стандартные стили для всех браузеров */
   .menu-content select {
     background: transparent;
-    border: none;
+    border: none; /* Убираем границу */
     color: white;
     font-family: Organetto, sans-serif;
     font-size: 24px;
     font-weight: 700;
     line-height: 32.47px;
     text-align: left;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    padding-right: 24px;
+    -webkit-appearance: none; /* Убираем стили по умолчанию в Safari */
+    -moz-appearance: none; /* Убираем стили по умолчанию в Firefox */
+    appearance: none; /* Убираем стили по умолчанию в других браузерах */
+    padding-right: 24px; /* Добавляем правый отступ для стрелочки */
   }
 
-  .menu-content option {
-    background-color: rgba(0, 0, 0, 0.9);
-    border: none;
-  }
-
-  .menu-content select:focus > option:checked {
-    background: #000 !important;
-    color: #f45a5a;
-  }
-
+  /* Убираем границу у контейнера */
   .mobile-dropdown-menu {
     display: inline-block;
     position: relative;
+    border: none; /* Убираем границу у контейнера */
+    padding: 0; /* Убираем отступы, если есть */
   }
 
+  /* Убираем границу у элемента option */
+  .menu-content option {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: none; /* Убираем границу у option */
+  }
+
+  /* Кастомная стрелочка */
   .mobile-dropdown-menu::after {
     content: '▼';
     font-size: 16px;
@@ -264,6 +265,13 @@
     transform: translateY(-50%);
     pointer-events: none;
     color: white;
+  }
+
+  /* Переопределяем стили при фокусе на элементе select */
+  .menu-content select:focus,
+  .menu-content select:focus-visible {
+    outline: none; /* Убираем стандартный контур */
+    border: none; /* Убираем границу при фокусе */
   }
 
   .mobile-about {
