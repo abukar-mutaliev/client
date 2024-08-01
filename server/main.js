@@ -9,6 +9,7 @@ const errorHandler = require("./middlewares/errorHandlingMiddleware");
 
 const app = express();
 const PORT = process.env.SERVER_PORT || 3000;
+
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
@@ -19,17 +20,18 @@ const start = async () => {
     await sequelize.authenticate();
     console.log("Соединение с БД было успешно установлено");
     await sequelize.sync();
-    app.use("/api", router);
+
     app.use("/static", express.static(path.join(__dirname, "../build/static")));
     app.use("/image", express.static(path.resolve(__dirname, "image")));
     app.use(express.static(path.join(__dirname, "../build")));
 
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "../build", "index.jsx.html"));
-    });
-    app.use(router);
+    app.use("/api", router);
 
-    app.listen(PORT, () => console.log(`Сервер запущен на порту:${PORT}`));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../build", "index.html"));
+    });
+
+    app.listen(PORT, () => console.log(`Сервер запущен на порту: ${PORT}`));
   } catch (e) {
     console.log("Невозможно выполнить подключение к БД: ", e);
   }
